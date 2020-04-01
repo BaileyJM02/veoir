@@ -1,28 +1,26 @@
-# Veoir Coursework
+# Veoir Coursework <!-- omit in toc -->
 
 By Bailey Matthews (2020)
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 
-- [Veoir Coursework](#veoir-coursework)
-  - [Table of Contents](#table-of-contents)
-  - [3.1 Analysis of the problem](#31-analysis-of-the-problem)
-    - [3.1.1 Problem identification](#311-problem-identification)
-    - [3.1.2 Stakeholders](#312-stakeholders)
-    - [3.1.3 Research the problem](#313-research-the-problem)
-    - [3.1.4 Specify the proposed solution](#314-specify-the-proposed-solution)
-  - [3.2 Design of the solution](#32-design-of-the-solution)
-    - [3.2.1 Decompose the problem](#321-decompose-the-problem)
-    - [3.2.2 Describe the solution](#322-describe-the-solution)
-    - [3.2.3 Describe the approach to testing](#323-describe-the-approach-to-testing)
-  - [3.3 Developing the solution](#33-developing-the-solution)
-    - [3.3.1 Iterative development process](#331-iterative-development-process)
-    - [3.3.2 Testing to inform development](#332-testing-to-inform-development)
-  - [3.4 Evaluation](#34-evaluation)
-    - [3.4.1 Testing to inform evaluation](#341-testing-to-inform-evaluation)
-    - [3.4.2 Success of the solution](#342-success-of-the-solution)
-    - [3.4.3 Describe the final product](#343-describe-the-final-product)
-    - [3.4.4 Maintenance and development](#344-maintenance-and-development)
+- [3.1 Analysis of the problem](#31-analysis-of-the-problem)
+  - [3.1.1 Problem identification](#311-problem-identification)
+  - [3.1.2 Stakeholders](#312-stakeholders)
+  - [3.1.3 Research the problem](#313-research-the-problem)
+  - [3.1.4 Specify the proposed solution](#314-specify-the-proposed-solution)
+- [3.2 Design of the solution](#32-design-of-the-solution)
+  - [3.2.1 Decompose the problem](#321-decompose-the-problem)
+  - [3.2.2 Describe the solution](#322-describe-the-solution)
+  - [3.2.3 Describe the approach to testing](#323-describe-the-approach-to-testing)
+- [3.3 Developing the solution](#33-developing-the-solution)
+  - [3.3.1 Iterative development process](#331-iterative-development-process)
+  - [3.3.2 Testing to inform development](#332-testing-to-inform-development)
+- [3.4 Evaluation](#34-evaluation)
+  - [3.4.1 Testing to inform evaluation](#341-testing-to-inform-evaluation)
+  - [3.4.2 Success of the solution](#342-success-of-the-solution)
+  - [3.4.3 Describe the final product](#343-describe-the-final-product)
+  - [3.4.4 Maintenance and development](#344-maintenance-and-development)
 
 ## 3.1 Analysis of the problem
 
