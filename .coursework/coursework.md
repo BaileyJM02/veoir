@@ -7,6 +7,7 @@ To-do:
 - [ ] Identified and explained with justification any limitations of the proposed solution.
 - [ ] Specified and justified the requirements for the solution including (as appropriate) any hardware and software requirements.
 - [ ] Identified and justified measurable success criteria for the proposed solution.
+
 Notes:
 - A brief, succinct description of your project, what you will do
 - Explain why the project needs to be completed by a computer
@@ -44,6 +45,7 @@ To-do:
 - [ ] Identified and justified the key variables / data structures / classes (as appropriate to the proposed solution) justifying and explaining any necessary validation.
 - [ ] Identified and justified the test data to be used during the iterative development of the solution.
 - [ ] Identified and justified any further data to be used in the post development phase.
+
 Notes:
 - As it says on the tin – design your project. The key here is CODE, CODE, CODE.
 - You CANNOT get any more than 4 marks in this section unless you have designed the CODE for ALL parts of your project. Again, most projects that do badly will have failed here.
@@ -70,6 +72,7 @@ To-do:
 - [ ] All variables and structures will be appropriately named.
 - [ ] There will be evidence of validation for all key elements of the solution.
 - [ ] The development will show review at all key stages in the process.
+
 Notes:
 - Talk through the development of your program
 - Show you have systematically tested the code you have written as you go along
@@ -82,6 +85,7 @@ Notes:
 ## 3.3.2 Testing to inform development
 - [ ] Provide annotated evidence for testing at each stage justifying the reason for the test.
 - [ ] Provide annotated evidence of any remedial actions taken justifying the decision made.
+
 Notes:
 - Final, terminal testing to prove you've met the success criteria and objectives you identified in the analysis stage
 
@@ -95,6 +99,7 @@ To-do:
 - [ ] Considered maintenance issues and limitations of the solution.
 - [ ] Described how the program could be developed to deal with limitations of potential improvements / changes.
 - [ ] There is a well developed line of reasoning which is clear and logically structured. The information presented is relevant and substantiated.
+
 Notes:
 - As you'd expect – how well did the project go?
 
