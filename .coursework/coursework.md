@@ -18,8 +18,20 @@ Notes:
 
 ## 3.1.1 Problem identification
 To-do:
-- [ ] Describe and justify the features that make the problem solvable by computational methods.
-- [ ] Explain why the problem is amenable to a computational approach.
+- [x] Describe and justify the features that make the problem solvable by computational methods.
+- [x] Explain why the problem is amenable to a computational approach.
+
+My project aims to turn screenshots of code that are normally shared online amongst developers into a more appealing, editable and customizable image. I'm also aiming to combat the limitation of being unable to copy and paste code from images by creating a unique URL design system to help increase usability and accessibility. The problem is that the screenshots of images are often unappealing and create an atmosphere around programming that it's too confusing. The image below is an example of the image I am trying to fix:
+
+![Unstyled code example](./images/example-code-ss-unstyled.png)
+
+As you can see this is difficult to read and has no padding around the edges. Therefore, when uploading to social media, such as Twitter, the image is cut and the code is hidden. This is not a major problem, but as the aim of my project is to make it look appealing to new and existing developers, I would like to try and amend this issue. 
+
+![Unstyled code example on twitter](./images/example-code-ss-unstyled-twitter.png)
+
+There are several factors that make this problem suitable for being solved with a computational approach. The main factor is image manipulation, a computer is far better at performing image manipulation effectively and quickly. Other factors are time taken to complete the task, reproducibility, standardisation and, simply, ease of use. I'll explain what I mean by these a little more. When working in a productive manor, or on a tight time-scale, a user would not want to have to load up their image manipulation program, screenshot their code, edit their image and then decide what colors they want where. They would then have to repeat this process every time they want to share a piece code. As image manipulation program's require vast amounts of user input, the outcome will always be slightly different due to user error. Solving a problem computationally removes this user error and allows for a stable system that, when an identical input is given, an identical output is returned.
+
+The structure of my project, being an API, means that object-oriented programming will be suitable. This is largely given to the event-driven architecture an API possesses, but also allows a key goal of standardisation to be achieved. In addition, inheritance and polymorphism are more computational methods that can be used in order to build on top of the base class for an input by allowing different themes to be selected and different outputs such as different file formats that may require specialised properties and functions. These methods will allow me to follow a modular approach when developing my project and will aid development of new features as well as improve readability.
 
 ## 3.1.2 Stakeholders
 To-do:
