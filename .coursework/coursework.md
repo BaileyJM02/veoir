@@ -81,7 +81,7 @@ Along with developers, my project could have an educational value as students co
 > - [ ] Describe the essential features of a computational solution explaining these choices.
 > - [ ] Explain the limitations of the proposed solution.
 
-For my project, I will be using Go<sup id="i1">[1](#f1)</sup> as this is a strongly typed language. This helps maintain a clear structure as variable types can't be more than one. Go also allows us to define fields and methods in `structs`<sup id="i2">[2](#f2)</sup> and `interfaces`<sup id="i3">[3](#f3)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i4">[4](#f4)</sup> and `net/http`<sup id="i5">[5](#f5)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests
+For my project, I will be using Go<sup id="i1">[1](#f1)</sup> as this is a strongly typed language. This helps maintain a clear structure as variable types can't be more than one. Go also allows us to define fields and methods in `structs`<sup id="i2">[2](#f2)</sup> and `interfaces`<sup id="i3">[3](#f3)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i4">[4](#f4)</sup> and `net/http`<sup id="i5">[5](#f5)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests.
 
 ### 3.1.4 Specify the proposed solution
 
