@@ -1,4 +1,4 @@
-name: Build a PDF from Coursework MD files
+name: Coursework PDF
 # This workflow is triggered on pushes to the repository.
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: mrtj/actions-makepdfs@master
+      - uses: baileyjm02/actions-makepdfs@master
         if: github.ref == 'refs/heads/master'
         with:
           markdown_dir: .coursework
