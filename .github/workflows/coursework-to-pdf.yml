@@ -1,9 +1,12 @@
 name: Build a PDF from Coursework MD files
 # This workflow is triggered on pushes to the repository.
 on:
+  push:
+    branches: [ master ]
   pull_request:
-    branches:
-      - master
+    branches: [ master ]
+  watch:
+    types: [ started ]
     # file paths to consider in the event. Optional; defaults to all.
     paths:
       - '.coursework/*'
