@@ -1,0 +1,23 @@
+name: Build a PDF from Coursework MD files
+# This workflow is triggered on pushes to the repository.
+on:
+  pull_request:
+    branches:
+      - master
+    # file paths to consider in the event. Optional; defaults to all.
+    paths:
+      - '.coursework/*'
+
+jobs:
+  build:
+    name: Build PDF
+    runs-on: ubuntu-latest
+    steps:
+      uses: actions/checkout@v1
+      uses: mkrakowitzer/actions-makepdfs@master
+        # if: github.ref == 'refs/heads/master'
+        # uses: actions/upload-artifact@v1
+        with:
+          name: veoir
+          markdown_dir: '.coursework/*'
+          output_dir: '.coursework/*'
