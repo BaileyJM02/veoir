@@ -17,6 +17,10 @@ jobs:
       - uses: mrtj/actions-makepdfs@master
       - uses: actions/upload-artifact@v1
         with:
-          name: veoir-coursework
           markdown_dir: '.coursework'
           output_dir: '.coursework'
+          assets_dir: '.coursework/images'
+          MARKDOWN_DIR: '.courseworkTEST'
+          OUTPUT_DIR: '.courseworkTEST'
+          ASSETS_DIR: '.coursework/imagesTEST'
+          name: veoir-coursework
