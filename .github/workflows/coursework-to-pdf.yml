@@ -14,9 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: mkrakowitzer/actions-makepdfs@master
+      - uses: mrtj/actions-makepdfs@master
+        if: github.ref == 'refs/heads/master'
+        with:
+          markdown_dir: .coursework
+          output_dir: .coursework
+          assets_dir: .coursework/assets
       - uses: actions/upload-artifact@v1
         with:
-          name: veoir
-          markdown_dir: '.coursework'
-          output_dir: '.coursework'
+          name: veoir-coursework
+          path: .coursework
