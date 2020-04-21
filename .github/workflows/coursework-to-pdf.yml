@@ -23,6 +23,8 @@ jobs:
           markdown_dir: .coursework
           output_dir: .coursework
           assets_dir: .coursework/assets
+          images_dir: .coursework/images
+          assets_path: ./images
       - uses: actions/upload-artifact@v1
         with:
           name: veoir-coursework
