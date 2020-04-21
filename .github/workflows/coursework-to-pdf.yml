@@ -15,9 +15,9 @@ jobs:
     steps:
       uses: actions/checkout@v1
       uses: mkrakowitzer/actions-makepdfs@master
-        # if: github.ref == 'refs/heads/master'
-        # uses: actions/upload-artifact@v1
-        with:
-          name: veoir
-          markdown_dir: '.coursework/*'
-          output_dir: '.coursework/*'
+      if: github.ref == 'refs/heads/master'
+      uses: actions/upload-artifact@v1
+      with:
+        name: veoir
+        markdown_dir: '.coursework/*'
+        output_dir: '.coursework/*'
