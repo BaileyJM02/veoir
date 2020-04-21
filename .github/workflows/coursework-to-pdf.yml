@@ -20,7 +20,4 @@ jobs:
           markdown_dir: '.coursework'
           output_dir: '.coursework'
           assets_dir: '.coursework/images'
-          MARKDOWN_DIR: '.courseworkTEST'
-          OUTPUT_DIR: '.courseworkTEST'
-          ASSETS_DIR: '.coursework/imagesTEST'
           name: veoir-coursework
