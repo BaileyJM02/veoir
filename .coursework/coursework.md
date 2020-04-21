@@ -21,6 +21,7 @@ By Bailey Matthews (2020)
   - [3.4.2 Success of the solution](#342-success-of-the-solution)
   - [3.4.3 Describe the final product](#343-describe-the-final-product)
   - [3.4.4 Maintenance and development](#344-maintenance-and-development)
+- [Footnotes](#footnotes)
 
 ## 3.1 Analysis of the problem
 
@@ -79,6 +80,8 @@ Along with developers, my project could have an educational value as students co
 > - [ ] Research the problem and solutions to similar problems to identify and justify suitable approaches to a solution.
 > - [ ] Describe the essential features of a computational solution explaining these choices.
 > - [ ] Explain the limitations of the proposed solution.
+
+For my project, I will be using Go<sup id="i1">[1](#f1)</sup> as this is a strongly typed language. This helps maintain a clear structure as variable types can't be more than one. Go also allows us to define fields and methods in `structs`<sup id="i2">[2](#f2)</sup> and `interfaces`<sup id="i3">[3](#f3)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i4">[4](#f4)</sup> and `net/http`<sup id="i5">[5](#f5)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests
 
 ### 3.1.4 Specify the proposed solution
 
@@ -204,3 +207,12 @@ Along with developers, my project could have an educational value as students co
 >
 > - [ ] Discuss the maintainability of the solution.
 > - [ ] Discuss potential further development of the solution.
+
+
+## Footnotes
+
+1. <span id="f1"></span> Go, sometimes referred to as "Golang", is a programming language made by Google. [Golang's website](https://golang.org) contains more information. [↩](#i1)
+2. <span id="f2"></span> [↩](#i2)
+3. <span id="f3"></span> [↩](#i3)
+4. <span id="f4"></span> [↩](#i4)
+5. <span id="f5"></span> [↩](#i5)
