@@ -20,9 +20,8 @@ jobs:
       - uses: baileyjm02/markdown-to-pdf@master
         if: github.ref == 'refs/heads/master'
         with:
-          markdown_dir: .coursework
+          input_dir: .coursework
           output_dir: .coursework
-          assets_dir: .coursework/assets
           images_dir: .coursework/images
           images_path: ./images
       - uses: actions/upload-artifact@v1
