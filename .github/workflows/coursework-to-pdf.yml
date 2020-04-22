@@ -7,9 +7,6 @@ on:
     branches: [ master ]
   watch:
     types: [ started ]
-    # file paths to consider in the event. Optional; defaults to all.
-    paths:
-      - '.coursework/*'
 
 jobs:
   build:
