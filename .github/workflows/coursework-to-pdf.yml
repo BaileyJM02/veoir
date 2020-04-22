@@ -23,7 +23,7 @@ jobs:
           input_dir: .coursework
           output_dir: .coursework
           images_dir: .coursework/images
-          images_path: ./images
+          image_import: ./images
       - uses: actions/upload-artifact@v1
         with:
           name: veoir-coursework
