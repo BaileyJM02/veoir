@@ -73,6 +73,10 @@ In my opinion, the main stakeholders for my project will be general developers, 
 
 Along with developers, my project could have an educational value as students could use this to create images of their code which wil be easier to hand in to their teacher. Also, the teacher could use my project to show example snippets, such as explaining recursion, and perhaps print the images, allowing for a "quick guide" worksheet to help the students along with a task.
 
+As I also plan to include a way to use a link to gain access to an editable and copyable page, similar to how the GitHub service "GitHub Gists"<sup id="i1">[1](#f1)</sup> works, only with a simpler and more intuitive user interface with the ability for the user to re-share their edited code. This creates a nice workflow that anyone would be able to use for multiple purposes, such as listing bash commands that are needed to install content or asking for a review on a small text paragraph which may needed to be updated from time-to-time.
+
+Due to the image being permanently kept, this would appeal to blog writers as they don't have to store the image on their own webserver and can simply include the image link. This ecosystem would allow creators to evolve their tutorials and social media outreach using one service and without having to learn a photo editing program with peace of mind their content won't be affected.
+
 ### 3.1.3 Research the problem
 
 > **To do:**
@@ -81,7 +85,7 @@ Along with developers, my project could have an educational value as students co
 > - [ ] Describe the essential features of a computational solution explaining these choices.
 > - [ ] Explain the limitations of the proposed solution.
 
-For my project, I will be using Go<sup id="i1">[1](#f1)</sup> as this is a strongly typed language. This helps maintain a clear structure as variable types can't be more than one. Go also allows us to define fields and methods in `structs`<sup id="i2">[2](#f2)</sup> and `interfaces`<sup id="i3">[3](#f3)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i4">[4](#f4)</sup> and `net/http`<sup id="i5">[5](#f5)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests. 
+For my project, I will be using Go<sup id="i2">[2](#f2)</sup> as this is a strongly typed language. This helps maintain a clear structure as variable types can't be more than one. Go also allows us to define fields and methods in `structs`<sup id="i3">[3](#f3)</sup> and `interfaces`<sup id="i4">[4](#f4)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i5">[5](#f5)</sup> and `net/http`<sup id="i6">[6](#f6)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests.
 
 ### 3.1.4 Specify the proposed solution
 
@@ -208,11 +212,11 @@ For my project, I will be using Go<sup id="i1">[1](#f1)</sup> as this is a stron
 > - [ ] Discuss the maintainability of the solution.
 > - [ ] Discuss potential further development of the solution.
 
-
 ## Footnotes
 
-1. <span id="f1"></span> Go, sometimes referred to as "Golang", is a programming language made by Google. [Golang's website](https://golang.org) contains more information. [↩](#i1)
-2. <span id="f2"></span> [↩](#i2)
-3. <span id="f3"></span> [↩](#i3)
-4. <span id="f4"></span> [↩](#i4)
-5. <span id="f5"></span> [↩](#i5)
+1. <span id="f1"></span> A gist can be a string of code, a bash script or some other small piece of data and is an easy way to share code. [GitHub](https://github.com) has a nice implementation of this in their [GitHub Gist](https://gist.github.com) service. [↩](#i1)
+2. <span id="f2"></span> Go, sometimes referred to as "Golang", is a programming language made by Google. [Golang's website](https://golang.org) contains more information. [↩](#i2)
+3. <span id="f2"></span> [↩](#i2)
+4. <span id="f3"></span> [↩](#i3)
+5. <span id="f4"></span> [↩](#i4)
+6. <span id="f5"></span> [↩](#i5)
