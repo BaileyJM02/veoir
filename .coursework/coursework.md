@@ -1,27 +1,32 @@
-# Veoir Coursework <!-- omit in toc -->
+# Veoir Coursework
 
 By Bailey Matthews (2020)
 
-## Table of Contents <!-- omit in toc -->
+## Table of Contents
 
-- [3.1 Analysis of the problem](#31-analysis-of-the-problem)
-  - [3.1.1 Problem identification](#311-problem-identification)
-  - [3.1.2 Stakeholders](#312-stakeholders)
-  - [3.1.3 Research the problem](#313-research-the-problem)
-  - [3.1.4 Specify the proposed solution](#314-specify-the-proposed-solution)
-- [3.2 Design of the solution](#32-design-of-the-solution)
-  - [3.2.1 Decompose the problem](#321-decompose-the-problem)
-  - [3.2.2 Describe the solution](#322-describe-the-solution)
-  - [3.2.3 Describe the approach to testing](#323-describe-the-approach-to-testing)
-- [3.3 Developing the solution](#33-developing-the-solution)
-  - [3.3.1 Iterative development process](#331-iterative-development-process)
-  - [3.3.2 Testing to inform development](#332-testing-to-inform-development)
-- [3.4 Evaluation](#34-evaluation)
-  - [3.4.1 Testing to inform evaluation](#341-testing-to-inform-evaluation)
-  - [3.4.2 Success of the solution](#342-success-of-the-solution)
-  - [3.4.3 Describe the final product](#343-describe-the-final-product)
-  - [3.4.4 Maintenance and development](#344-maintenance-and-development)
-- [Footnotes](#footnotes)
+- [Veoir Coursework](#veoir-coursework)
+  - [Table of Contents](#table-of-contents)
+  - [3.1 Analysis of the problem](#31-analysis-of-the-problem)
+    - [3.1.1 Problem identification](#311-problem-identification)
+    - [3.1.2 Stakeholders](#312-stakeholders)
+    - [3.1.3 Research the problem](#313-research-the-problem)
+      - [Language](#language)
+      - [External Language Packages](#external-language-packages)
+      - [Curated Image](#curated-image)
+    - [3.1.4 Specify the proposed solution](#314-specify-the-proposed-solution)
+  - [3.2 Design of the solution](#32-design-of-the-solution)
+    - [3.2.1 Decompose the problem](#321-decompose-the-problem)
+    - [3.2.2 Describe the solution](#322-describe-the-solution)
+    - [3.2.3 Describe the approach to testing](#323-describe-the-approach-to-testing)
+  - [3.3 Developing the solution](#33-developing-the-solution)
+    - [3.3.1 Iterative development process](#331-iterative-development-process)
+    - [3.3.2 Testing to inform development](#332-testing-to-inform-development)
+  - [3.4 Evaluation](#34-evaluation)
+    - [3.4.1 Testing to inform evaluation](#341-testing-to-inform-evaluation)
+    - [3.4.2 Success of the solution](#342-success-of-the-solution)
+    - [3.4.3 Describe the final product](#343-describe-the-final-product)
+    - [3.4.4 Maintenance and development](#344-maintenance-and-development)
+  - [Footnotes](#footnotes)
 
 ## 3.1 Analysis of the problem
 
@@ -85,7 +90,17 @@ Due to the image being permanently kept, this would appeal to blog writers as th
 > - [ ] Describe the essential features of a computational solution explaining these choices.
 > - [ ] Explain the limitations of the proposed solution.
 
-For my project, I will be using Go<sup id="i2">[2](#f2)</sup> as this is a strongly typed language. This helps maintain a clear structure as variable types can't be more than one. Go also allows us to define fields and methods in `structs`<sup id="i3">[3](#f3)</sup> and `interfaces`<sup id="i4">[4](#f4)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i5">[5](#f5)</sup> and `net/http`<sup id="i6">[6](#f6)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests.
+#### Language
+
+For my project, I will be using Go<sup id="i2">[2](#f2)</sup> as this is a strongly typed language. This helps maintain a clear structure as, for example, we can assign variables to a type and they can contain only that type, attempting to assign this variable to another type fails at compile-time. This ensures that no type errors occur during run-time, other than within edge cases. Go also allows us to define fields and methods in `structs`<sup id="i3">[3](#f3)</sup> and `interfaces`<sup id="i4">[4](#f4)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i5">[5](#f5)</sup> and `net/http`<sup id="i6">[6](#f6)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests. There are however a few changes to the default `net/http`<sup id="i6">[6](#f6)</sup> package that need to be changed in order for my Go program to become 'production ready' and correctly handle a large number of requests. This is discussed in detail within section [3.1.4](#314-specify-the-proposed-solution).
+
+#### External Language Packages
+
+Although Go has a vast number of core packages, including a `net/http`<sup id="i6">[6](#f6)</sup> package for handling requests over the http protocol, there are also a vast number of user created packages that extend the default packages. For my project, I will be using [Julien Schmidt's](https://github.com/julienschmidt) [`HttpRouter`](https://github.com/julienschmidt/httprouter) library that is still low level, therefor quick, but adds important features such as a built-in routing pattern that allows for HTTP paths to be easily created and improves readability within my code.
+
+#### Curated Image
+
+Once a user has sent data to my service, I want to be able to send back a number of images, such as PNG, SVG and GIF, based on their choice. To do this, and to make image designs (such as colors) the same on each exported type, I need a base image. For this, I am using an SVG, as it's the easiest to created as a developer when creating either standard layouts or a master template as an SVG is an XML-based<sup id="i7">[7](#f7)</sup> vector image. This means it can be written as text and then interprited by the browser (or other software) to output a graphic. SVGs also allow for inline CSS<sup id="i8">[8](#f8)</sup>****
 
 ### 3.1.4 Specify the proposed solution
 
@@ -94,6 +109,8 @@ For my project, I will be using Go<sup id="i2">[2](#f2)</sup> as this is a stron
 > - [ ] Specify and justify the solution requirements including hardware and software configuration (if appropriate).
 > - [ ] Identify and justify measurable success criteria for the proposed solution.
 
+> The default ListenAndServe method uses the default HTTP server. Some of the default values are set to extremely long values or are set to 0 (which disables them). Cloudflare has written an extensive blog post on how to set up a production-ready Go HTTP server and HTTP client. https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
+> 
 ## 3.2 Design of the solution
 
 > **To do:**
@@ -214,9 +231,9 @@ For my project, I will be using Go<sup id="i2">[2](#f2)</sup> as this is a stron
 
 ## Footnotes
 
-1. <span id="f1"></span> A gist can be a string of code, a bash script or some other small piece of data and is an easy way to share code. [GitHub](https://github.com) has a nice implementation of this in their [GitHub Gist](https://gist.github.com) service. [↩](#i1)
-2. <span id="f2"></span> Go, sometimes referred to as "Golang", is a programming language made by Google. [Golang's website](https://golang.org) contains more information. [↩](#i2)
-3. <span id="f2"></span> [↩](#i2)
-4. <span id="f3"></span> [↩](#i3)
-5. <span id="f4"></span> [↩](#i4)
-6. <span id="f5"></span> [↩](#i5)
+1. <span id="f1"></span>A gist can be a string of code, a bash script or some other small piece of data and is an easy way to share code.[GitHub](https://github.com) has a nice implementation of this in their [GitHub Gist](https://gist.github.com) service. [↩](#i1)
+2. <span id="f2"></span>Go, sometimes referred to as "Golang", is a programming language made by Google.[Golang's website](https://golang.org) contains more information. [↩](#i2)
+3. <span id="f2"></span>[↩](#i2)
+4. <span id="f3"></span>[↩](#i3)
+5. <span id="f4"></span>[↩](#i4)
+6. <span id="f5"></span>[↩](#i5)
