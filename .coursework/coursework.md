@@ -13,7 +13,17 @@ By Bailey Matthews (2020)
       - [Language](#language)
       - [External Language Packages](#external-language-packages)
       - [Curated Image](#curated-image)
+      - [Carbon](#carbon)
+      - [User-Agent](#user-agent)
+      - [Cross Platform](#cross-platform)
+      - [Limitations](#limitations)
     - [3.1.4 Specify the proposed solution](#314-specify-the-proposed-solution)
+      - [Project Specification](#project-specification)
+      - [Software Needed (Development)](#software-needed-development)
+      - [Hardware Needed (Development)](#hardware-needed-development)
+      - [Software Requirements (User)](#software-requirements-user)
+      - [Hardware Requirements (User)](#hardware-requirements-user)
+      - [Success Criteria](#success-criteria)
   - [3.2 Design of the solution](#32-design-of-the-solution)
     - [3.2.1 Decompose the problem](#321-decompose-the-problem)
     - [3.2.2 Describe the solution](#322-describe-the-solution)
@@ -86,21 +96,40 @@ Due to the image being permanently kept, this would appeal to blog writers as th
 
 > **To do:**
 >
-> - [ ] Research the problem and solutions to similar problems to identify and justify suitable approaches to a solution.
-> - [ ] Describe the essential features of a computational solution explaining these choices.
-> - [ ] Explain the limitations of the proposed solution.
+> - [x] Research the problem and solutions to similar problems to identify and justify suitable approaches to a solution.
+> - [ ] **(?)** Describe the essential features of a computational solution explaining these choices.
+> - [x] Explain the limitations of the proposed solution.
 
 #### Language
 
-For my project, I will be using Go<sup id="i2">[2](#f2)</sup> as this is a strongly typed language. This helps maintain a clear structure as, for example, we can assign variables to a type and they can contain only that type, attempting to assign this variable to another type fails at compile-time. This ensures that no type errors occur during run-time, other than within edge cases. Go also allows us to define fields and methods in `structs`<sup id="i3">[3](#f3)</sup> and `interfaces`<sup id="i4">[4](#f4)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i5">[5](#f5)</sup> and `net/http`<sup id="i6">[6](#f6)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests. There are however a few changes to the default `net/http`<sup id="i6">[6](#f6)</sup> package that need to be changed in order for my Go program to become 'production ready' and correctly handle a large number of requests. This is discussed in detail within section [3.1.4](#314-specify-the-proposed-solution).
+For my project, I will be using Go<sup id="i2">[2](#f2)</sup> as this is a strongly typed language. This helps maintain a clear structure as, for example, we can assign variables to a type and they can contain only that type, attempting to assign this variable to another type fails at compile-time. This ensures that no type errors occur during run-time, other than within edge cases. Go also allows us to define fields and methods in `structs`<sup id="i3">[3](#f3)</sup> and `interfaces`<sup id="i4">[4](#f4)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i5">[5](#f5)</sup> and `net/http`<sup id="i6">[6](#f6)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests. There are however a few changes to the default `net/http`<sup id="i6">[6](#f6)</sup> package that need to be changed in order for my Go program to become 'production ready' and correctly handle a large number of requests. This is discussed in detail within section [3.2](#32-design-of-the-solution).
 
 #### External Language Packages
 
-Although Go has a vast number of core packages, including a `net/http`<sup id="i6">[6](#f6)</sup> package for handling requests over the http protocol, there are also a vast number of user created packages that extend the default packages. For my project, I will be using [Julien Schmidt's](https://github.com/julienschmidt) [`HttpRouter`](https://github.com/julienschmidt/httprouter) library that is still low level, therefor quick, but adds important features such as a built-in routing pattern that allows for HTTP paths to be easily created and improves readability within my code.
+Although Go has a vast number of core packages, including a `net/http`<sup id="i6">[6](#f6)</sup> package for handling requests over the http protocol, there are also a vast number of user created packages that extend the default packages. For my project, I will be using Julien Schmidt's<sup id="i7">[7](#f7)</sup> `HttpRouter`<sup id="i8">[8](#f8)</sup> library that is still low level, therefor quick, but adds important features such as a built-in routing pattern that allows for HTTP paths to be easily created and improves readability within the code.
 
 #### Curated Image
 
-Once a user has sent data to my service, I want to be able to send back a number of images, such as PNG, SVG and GIF, based on their choice. To do this, and to make image designs (such as colors) the same on each exported type, I need a base image. For this, I am using an SVG, as it's the easiest to created as a developer when creating either standard layouts or a master template as an SVG is an XML-based<sup id="i7">[7](#f7)</sup> vector image. This means it can be written as text and then interprited by the browser (or other software) to output a graphic. SVGs also allow for inline CSS<sup id="i8">[8](#f8)</sup>****
+Once a user has sent data to my service, I want to be able to send back an image encoding of their choice, from the select options, such as PNG, SVG and GIF. To do this, and to make image designs (such as colors) the same on each exported type, I will need to use a base image. For this, I am using an SVG, as it's the easiest to create and maintain from a developer's perspective when creating either standard layouts or a master template as an SVG is an XML-based<sup id="i9">[9](#f9)</sup> vector image. This means it can be written as text and then interpreted by the browser (or other software) to output a graphic. SVGs also allow for inline CSS<sup id="i10">[10](#f10)</sup> which will allow for a themeable environment. Such environment will increase the production value of my project as users will be able to create and use colours related to their product or website etc.
+
+#### Carbon
+
+Carbon<sup id="i11">[11](#f11)</sup> is a very similar project to what I want to achieve. However, they focused on a website-first design which means that they don't have a public API which other users can implement onto their own apps, they have to instead use the website. This creates more work for the creator of a blog etc. and limits the pluggability of such a service into other projects created by 3rd party developers. There are however a few community<sup id="i12">[12](#f12)</sup> projects that aim to implement Carbon<sup id="i11">[11](#f11)</sup> into other text editors and a CLI (Command Line Interface), and I would welcome these ideas into my project.
+
+#### User-Agent 
+> Use the user-agent to either display the editor or the raw encoding of the image
+
+#### Cross Platform
+
+Due to the design of Go<sup id="i2">[2](#f2)</sup> and the powerful CLI options, the source-code can be built to run on most architectures, and all well-known ones such as Darwin<sup id="i13">[13](#f13)</sup> (MacOS / iOS<sup id="i14">[14](#f14)</sup>), Linux<sup id="i14">[15](#f15)</sup>, Windows<sup id="i16">[16](#f16)</sup> and FreeBSD<sup id="i17">[17](#f17)</sup>. Sometimes there is a needed addition of a C compiler for architectures such as Android<sup id="i18">[18](#f18)</sup>. It even supports WASM<sup id="i19">[19](#f19)</sup> which allows for Go to be compiled and supported on a browser.
+
+#### Limitations
+
+As far a Go<sup id="i2">[2](#f2)</sup> goes there are very few technical limitations. However, as a project there are a few limitations surrounding the development life-cycle and 'real-world' usage. 
+
+These are things such as including rate-limiting<sup id="i20">[20](#f20)</sup> and authorisation<sup id="i21">[21](#f21)</sup> over a public endpoint to reduce server load and prevent DDoS attacks<sup id="i22">[22](#f22)</sup> from overloading the server due to image processing tasks which are resource intensive.
+
+Due to the time constrain of the given period to complete this task, I will not be including these factors as they will require a database to be setup, a database handler to be implemented and a user service that would handle sign-ups and token generations. I feel these would deviate to far from the core of the project and in turn I have decided to design the program in such a way that a database could be implemented at a later date and support these factors, but the current endpoint for the project will be created without any security features protecting it from attacks as it will only be used in a contained and controlled environment.
 
 ### 3.1.4 Specify the proposed solution
 
@@ -109,8 +138,34 @@ Once a user has sent data to my service, I want to be able to send back a number
 > - [ ] Specify and justify the solution requirements including hardware and software configuration (if appropriate).
 > - [ ] Identify and justify measurable success criteria for the proposed solution.
 
-> The default ListenAndServe method uses the default HTTP server. Some of the default values are set to extremely long values or are set to 0 (which disables them). Cloudflare has written an extensive blog post on how to set up a production-ready Go HTTP server and HTTP client. https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
-> 
+#### Project Specification
+
+A REST API<sup id="i23">[23](#f23)</sup> web server with the ability to receive a payload, use said values and options sent to create and return an image containing the code in a timely manor with support for styling and encoding options.
+
+The ability to recognise when an image is being accessed by a browser using the user-agent<sup id="i24">[24](#f24)</sup> to either serve a HTML page containing an editor or the raw encoding of an image when it is being accessed by a server which expects an image type to be found.
+
+#### Software Needed (Development)
+
+- Go<sup id="i2">[2](#f2)</sup>.
+- A text editor.
+- Any supported OS of both Go<sup id="i2">[2](#f2)</sup> and a text editor.
+
+#### Hardware Needed (Development)
+
+- A computer with at minimum a keyboard, monitor and adhering to the minimum hardware requirements<sup id="i25">[25](#f25)</sup> of Go.
+
+#### Software Requirements (User)
+
+- Any system capable of using cURL<sup id="i26">[26](#f26)</sup> or alternatives.
+
+#### Hardware Requirements (User)
+
+- A computer with at minimum a keyboard, monitor and an active internet connection to access the API.
+
+#### Success Criteria
+
+> Todo
+
 ## 3.2 Design of the solution
 
 > **To do:**
@@ -129,6 +184,8 @@ Once a user has sent data to my service, I want to be able to send back a number
 > - You CANNOT get any more than 4 marks in this section unless you have designed the CODE for ALL parts of your project. Again, most projects that do badly will have failed here.
 > - Screen designs, code designs, diagrams, tables of key variables and data structures
 
+> The default ListenAndServe method uses the default HTTP server. Some of the default values are set to extremely long values or are set to 0 (which disables them). Cloudflare has written an extensive blog post on how to set up a production-ready Go HTTP server and HTTP client. https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
+> 
 ### 3.2.1 Decompose the problem
 
 > **To do:**
@@ -231,9 +288,28 @@ Once a user has sent data to my service, I want to be able to send back a number
 
 ## Footnotes
 
-1. <span id="f1"></span>A gist can be a string of code, a bash script or some other small piece of data and is an easy way to share code.[GitHub](https://github.com) has a nice implementation of this in their [GitHub Gist](https://gist.github.com) service. [↩](#i1)
-2. <span id="f2"></span>Go, sometimes referred to as "Golang", is a programming language made by Google.[Golang's website](https://golang.org) contains more information. [↩](#i2)
+1. <span id="f1"></span>A gist can be a string of code, a bash script or some other small piece of data and is an easy way to share code. GitHub (https://github.com) has a nice implementation of this in their GitHub Gist (https://gist.github.com) service. [↩](#i1)
+2. <span id="f2"></span>Go, sometimes referred to as Golang, is a programming language made by Google. Go's website (https://golang.org) contains more information. [↩](#i2)
 3. <span id="f2"></span>[↩](#i2)
 4. <span id="f3"></span>[↩](#i3)
 5. <span id="f4"></span>[↩](#i4)
 6. <span id="f5"></span>[↩](#i5)
+7. <span id="f6"></span>Julien Schmidt (https://github.com/julienschmidt) [↩](#i6)
+8. <span id="f7"></span>`HttpRouter` (https://github.com/julienschmidt/httprouter) [↩](#i7)
+9. <span id="f5"></span>[↩](#i5)
+10. <span id="f5"></span>[↩](#i5)
+11. <span id="f5"></span>Carbon's Website (https://carbon.now.sh/) [↩](#i5)
+12. <span id="f5"></span>Carbon's Github Readme (https://github.com/carbon-app/carbon#community) [↩](#i5)
+13. <span id="f5"></span>[↩](#i5)
+14. <span id="f5"></span>[↩](#i5)
+15. <span id="f5"></span>[↩](#i5)
+16. <span id="f5"></span>[↩](#i5)
+17. <span id="f5"></span>[↩](#i5)
+18. <span id="f5"></span>[↩](#i5)
+19. <span id="f5"></span>[↩](#i5)
+20. <span id="f5"></span>[↩](#i5)
+21. <span id="f5"></span>[↩](#i5)
+22. <span id="f5"></span>[↩](#i5)
+23. <span id="f5"></span>[↩](#i5)
+24. <span id="f5"></span>[↩](#i5)
+25. <span id="f25"></span> Minimum Requirements of Go (https://github.com/golang/go/wiki/MinimumRequirements) [↩](#i25)
