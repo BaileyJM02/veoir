@@ -100,28 +100,51 @@ Due to the image being permanently kept, this would appeal to blog writers as th
 > - [ ] **(?)** Describe the essential features of a computational solution explaining these choices.
 > - [x] Explain the limitations of the proposed solution.
 
+When researching how to build my project, the most important decision to be made is what programming language I would choose. This is because an API can be built in many languages, but I need one that can specifically handle image manipulation well and perform quickly and safely while also being robust and well tested. Other things to consider and cross-platform capabilities and the development life-cycle: I don't want a language that is easy to maintain but requires lots of effort to find and fix a bug, or one that requires specialised solutions when deploying to cloud services.
+
 #### Language
 
 For my project, I will be using Go<sup id="i2">[2](#f2)</sup> as this is a strongly typed language. This helps maintain a clear structure as, for example, we can assign variables to a type and they can contain only that type, attempting to assign this variable to another type fails at compile-time. This ensures that no type errors occur during run-time, other than within edge cases. Go also allows us to define fields and methods in `structs`<sup id="i3">[3](#f3)</sup> and `interfaces`<sup id="i4">[4](#f4)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i5">[5](#f5)</sup> and `net/http`<sup id="i6">[6](#f6)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests. There are however a few changes to the default `net/http`<sup id="i6">[6](#f6)</sup> package that need to be changed in order for my Go program to become 'production ready' and correctly handle a large number of requests. This is discussed in detail within section [3.2](#32-design-of-the-solution).
+
+Other advantages of Go is that it offers a growing community of support and due to the language being openly developed and used by Google since it first appeared in November 2009, there is an abundance of questions relating to specific topics on forums or question asking sites such as StackOverflow. Go also offers memory safety<sup id="ix">[x](#fx)</sup>, garbage collection<sup id="ix">[x](#fx)</sup> and concurrency<sup id="ix">[x](#fx)</sup> which are extremely useful when developing in said language as it ensures that there are lower chances for memory leaks and if the program is written correctly the garbage collection will ensure that a lower amount of memory is used. This lowers cost for hardware and is a very practical solution.
+
+Built in testing is also another factor which I find a huge benefit within Go as it ensures that all code can be easily tested, but eliminates the complicated setup of integrating a third-party testing service into the development life-cycle. Finally, auto-generated technical documentation for all packages created in Go on their website allows for not only my program to be well documented but for all packages I import and use to be well documented.
+
+Other languages I considered where Python<sup id="ix">[x](#fx)</sup>, PHP<sup id="ix">[x](#fx)</sup> and JavaScript<sup id="ix">[x](#fx)</sup> (using the V8 JavaScript engine<sup id="ix">[x](#fx)</sup> within NodeJS<sup id="ix">[x](#fx)</sup>). I know Python very well and it has a large support community as well as good documentation however the increased use of whitespace highlights a development issues as it becomes increasingly hard to debug an issue on larger files when whitespace is the only way to change the runtime hierarchy of the code. It is in my personal opinion that I think the whitespace removes readability rather than increases it. Another factor of Python is that it is mainly a loosely typed and interpreted language at runtime, and to ensure it is compiled it requires further steps within the development cycle that are just not needed within Go.
+
+PHP is another alternative that I considered, it has a large developer following, it is much more mature than Go, as it was created in 1994, and it has an abundance of frameworks to ensure that API development is easy. Another plus is that PHP can be used for the whole development stack: frontend and backend, without much extra work. The big negative is that is an interpreted language, which means I can not use the compiler to check if I have made any 'silly' errors, such as a misplacement of a variable until the code is run within the program. To combat this I could use tests but PHP requires a large amount of work to use tests, and to ensure good testing I would be forced to reply upon existing frameworks which may reach end-of-life due to the thrid-party nature of such applications.
+
+Lastly, I considered JavaScript to be another good alternative as with NodeJS (Or more recently Deno<sup id="ix">[x](#fx)</sup>) it allows for easy server-side development and frontend development in one codebase. However, I find that I would need to use a language like Typescript<sup id="ix">[x](#fx)</sup> to ensure that my JavaScript code was strictly typed. This would add further complication to the development life-cycle and require the knowledge of a separate language (TypeScript) to code my project. The reason I would not use JavaScript on its own is the lack of structure I feel the types have. For example:
+
+- `[]` and `![]` are both equal. Further more, `!![]` returns `true` meaning that removing the contradicting double exclamation mark, 'not not' should mean that `[]` still equals `true`, but it in-fact equals `false`
+- `NaN` which stands for 'Not a Number', is in-fact interpreted as a number.
+
+These are just two examples but I feel that it would increase the time spent trying to debug errors that logically make sense and should work, but do to the nature of JavaScripts type matching fail.
 
 #### External Language Packages
 
 Although Go has a vast number of core packages, including a `net/http`<sup id="i6">[6](#f6)</sup> package for handling requests over the http protocol, there are also a vast number of user created packages that extend the default packages. For my project, I will be using Julien Schmidt's<sup id="i7">[7](#f7)</sup> `HttpRouter`<sup id="i8">[8](#f8)</sup> library that is still low level, therefor quick, but adds important features such as a built-in routing pattern that allows for HTTP paths to be easily created and improves readability within the code.
 
+There are a few other packages that I could have picked, such as Resty<sup id="ix">[x](#fx)</sup>, go-http-client<sup id="ix">[x](#fx)</sup> and Gentleman<sup id="ix">[x](#fx)</sup>. The reasons for not picking Resty and Gentleman are they they are more of a separate package meant to overlay the core `net/http` package that Go provides. I do not want this as it adds unnecessary complication to my application but also increases the development risk of such a package becoming unmaintained and therefor requiring more time in the future. The reason I chose HttpRouter over go-http-client is that go-http-client is a relatively new package with a single maintainer. This means it could change quickly and abruptly due to the discretion of the maintainer and break my application. The singe maintainer could also lose interest and abandon the package. Requiring me to move to a new one anyway. There is also no overwhelming differences or features that go-http-client has and HttpRouter doesn't. Therefor I decided to go with the safer option.
+
 #### Curated Image
 
 Once a user has sent data to my service, I want to be able to send back an image encoding of their choice, from the select options, such as PNG, SVG and GIF. To do this, and to make image designs (such as colors) the same on each exported type, I will need to use a base image. For this, I am using an SVG, as it's the easiest to create and maintain from a developer's perspective when creating either standard layouts or a master template as an SVG is an XML-based<sup id="i9">[9](#f9)</sup> vector image. This means it can be written as text and then interpreted by the browser (or other software) to output a graphic. SVGs also allow for inline CSS<sup id="i10">[10](#f10)</sup> which will allow for a themeable environment. Such environment will increase the production value of my project as users will be able to create and use colours related to their product or website etc.
+
+> Talk about the Discord Go image package or ones that I find to fix the solution.
 
 #### Carbon
 
 Carbon<sup id="i11">[11](#f11)</sup> is a very similar project to what I want to achieve. However, they focused on a website-first design which means that they don't have a public API which other users can implement onto their own apps, they have to instead use the website. This creates more work for the creator of a blog etc. and limits the pluggability of such a service into other projects created by 3rd party developers. There are however a few community<sup id="i12">[12](#f12)</sup> projects that aim to implement Carbon<sup id="i11">[11](#f11)</sup> into other text editors and a CLI (Command Line Interface), and I would welcome these ideas into my project.
 
 #### User-Agent 
-> Use the user-agent to either display the editor or the raw encoding of the image
+> Use the user-agent to either display the editor or the raw encoding of the image, talk about how I can find the ones relating to all major browsers.
 
 #### Cross Platform
 
 Due to the design of Go<sup id="i2">[2](#f2)</sup> and the powerful CLI options, the source-code can be built to run on most architectures, and all well-known ones such as Darwin<sup id="i13">[13](#f13)</sup> (MacOS / iOS<sup id="i14">[14](#f14)</sup>), Linux<sup id="i14">[15](#f15)</sup>, Windows<sup id="i16">[16](#f16)</sup> and FreeBSD<sup id="i17">[17](#f17)</sup>. Sometimes there is a needed addition of a C compiler for architectures such as Android<sup id="i18">[18](#f18)</sup>. It even supports WASM<sup id="i19">[19](#f19)</sup> which allows for Go to be compiled and supported on a browser.
+
+> Explain why cross platform will allow me to deploy it on a server of my chosing easier and cheaply
 
 #### Limitations
 
