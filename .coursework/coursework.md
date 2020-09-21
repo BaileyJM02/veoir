@@ -131,13 +131,23 @@ There are a few other packages that I could have picked, such as Resty<sup id="i
 
 Once a user has sent data to my service, I want to be able to send back an image encoding of their choice, from the select options, such as PNG, SVG and GIF. To do this, and to make image designs (such as colors) the same on each exported type, I will need to use a base image. For this, I am using an SVG, as it's the easiest to create and maintain from a developer's perspective when creating either standard layouts or a master template as an SVG is an XML-based<sup id="i9">[9](#f9)</sup> vector image. This means it can be written as text and then interpreted by the browser (or other software) to output a graphic. SVGs also allow for inline CSS<sup id="i10">[10](#f10)</sup> which will allow for a themeable environment. Such environment will increase the production value of my project as users will be able to create and use colours related to their product or website etc.
 
-> Talk about the Discord Go image package or ones that I find to fix the solution.
+For converting the image from an SVG to other encodings I will require an external package. I have done some research and feel that Discord's Go image manipulation package will be sufficient for my needs when encoding an SVG to other codecs.
+> Improve this section with further research
 
 #### Carbon
 
 Carbon<sup id="i11">[11](#f11)</sup> is a very similar project to what I want to achieve. However, they focused on a website-first design which means that they don't have a public API which other users can implement onto their own apps, they have to instead use the website. This creates more work for the creator of a blog etc. and limits the pluggability of such a service into other projects created by 3rd party developers. There are however a few community<sup id="i12">[12](#f12)</sup> projects that aim to implement Carbon<sup id="i11">[11](#f11)</sup> into other text editors and a CLI (Command Line Interface), and I would welcome these ideas into my project.
 
-#### User-Agent 
+#### User-Agent
+
+A user-agent is a string that is sent from every browser with each request. It can be used to ensure that the sent data is rendered correctly for each browser engine. I plan to use this feature to test whether the HTTP request for the image is being sent from a browser, or another resource. To do this I will match the sent user-agent against an array of 'known' user-agents for the most used browsers<sup id="ix">[x](#fx)</sup>. The reason I want to check whether a request is sent from a browser is to change the request to include HTML code for my code-editing form. This obviously can't be included when the image is fetched from another source as it would be expecting an image header and an image file to be sent directly. This may cause some confusion for users if they use options like 'open image in new tab'. To counteract this, I will add an option to append to the URL to directly get the image.
+
+This will mean that I will have the URLs built as:
+
+- `/<hash>.png`: This will be the default path which would include a check to see if it was from a browser.
+- If a user is visiting from a browser they will be redirected to `/<hash>/` which is where they will be greeted with the editor.
+- If a user requires the image to be served with the image headers and direct file while using the browser they will be able to use `/raw/<hash>.png`. This will direct to `/<hash>.png?r=1` where `r` will relate to a variable 'raw' and `1` will mean true. Alright I could send the user directly to the URL with the parameter I want to be able to create a memorable path.
+
 > Use the user-agent to either display the editor or the raw encoding of the image, talk about how I can find the ones relating to all major browsers.
 
 #### Cross Platform
