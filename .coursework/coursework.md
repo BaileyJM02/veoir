@@ -40,32 +40,43 @@ By Bailey Matthews (2020)
 
 ## 3.1 Analysis of the problem
 
-> **To do:**
->
-> - [x] Described and justified the features that make the problem solvable by computational methods, explaining why it is amenable to a computational approach.
-> - [x] Identified suitable stakeholders for the project and described them explaining how they will make use of the proposed solution and why it is appropriate to their needs.
-> - [ ] Researched the problem in depth looking at existing solutions to similar problems, identifying and justifying suitable approaches based on this research.
-> - [ ] Identified the essential features of the proposed computational solution explaining these choices.
-> - [ ] Identified and explained with justification any limitations of the proposed solution.
-> - [ ] Specified and justified the requirements for the solution including (as appropriate) any hardware and software requirements.
-> - [ ] Identified and justified measurable success criteria for the proposed solution.
+<details><summary>Section check list</summary>
 
-> **Notes:**
->
-> - A brief, succinct description of your project, what you will do
-> - Explain why the project needs to be completed by a computer
-> - **Research** – lots of research (all poor projects fail here) – this is where you go and find out HOW TO DO YOUR PROJECT!! I cannot emphasise this enough. In this section you'll need to find out how other people have - solved similar problems and use this to justify your approach.
-> - Success criteria
-> - Hardware and software requirements
-> - Testing strategy this makes it really
+**To do:**
+
+- [x] Described and justified the features that make the problem solvable by computational methods, explaining why it is amenable to a computational approach.
+- [x] Identified suitable stakeholders for the project and described them explaining how they will make use of the proposed solution and why it is appropriate to their needs.
+- [ ] Researched the problem in depth looking at existing solutions to similar problems, identifying and justifying suitable approaches based on this research.
+- [ ] Identified the essential features of the proposed computational solution explaining these choices.
+- [ ] Identified and explained with justification any limitations of the proposed solution.
+- [ ] Specified and justified the requirements for the solution including (as appropriate) any hardware and software requirements.
+- [ ] Identified and justified measurable success criteria for the proposed solution.
+
+</details>
+
+<details><summary>Section notes</summary>
+
+**Notes:**
+
+- A brief, succinct description of your project, what you will do
+- Explain why the project needs to be completed by a computer
+- **Research** – lots of research (all poor projects fail here) – this is where you go and find out HOW TO DO YOUR PROJECT!! I cannot emphasise this enough. In this section you'll need to find out how other people have - solved similar problems and use this to justify your approach.
+- Success criteria
+- Hardware and software requirements
+- Testing strategy this makes it really
+
+</details>
 
 ### 3.1.1 Problem identification
 
-> **To do:**
->
-> - [x] Describe and justify the features that make the problem solvable by computational methods.
-> - [x] Explain why the problem is amenable to a computational approach.
+<details><summary>Section check list</summary>
 
+**To do:**
+
+- [x] Describe and justify the features that make the problem solvable by computational methods.
+- [x] Explain why the problem is amenable to a computational approach.
+
+</details>
 My project aims to turn screenshots of code that are normally shared online amongst developers into a more appealing, editable and customizable image. I'm also aiming to combat the limitation of being unable to copy and paste code from images by creating a unique URL design system to help increase usability and accessibility. The problem is that the screenshots of images are often unappealing and create an atmosphere around programming that it's too confusing. The image below is an example of the image I am trying to fix:
 
 ![Unstyled code example](./images/example-code-ss-unstyled.png)
@@ -80,9 +91,13 @@ The structure of my project, being an API, means that object-oriented programmin
 
 ### 3.1.2 Stakeholders
 
-> **To do:**
->
-> - [x] Identify and describe those who will have an interest in the solution explaining how the solution is appropriate to their needs (this may be named individuals, groups or persona that describes the target end user).
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [x] Identify and describe those who will have an interest in the solution explaining how the solution is appropriate to their needs (this may be named individuals, groups or persona that describes the target end user).
+
+</details>
 
 In my opinion, the main stakeholders for my project will be general developers, but more inclined to those who write tutorials and have a large social-media influence, where writing and showing appealing content is important to them and their audience. I also feel that it would have a positive impact on people writing documentation or including small examples of how their project can be used.
 
@@ -94,11 +109,15 @@ Due to the image being permanently kept, this would appeal to blog writers as th
 
 ### 3.1.3 Research the problem
 
-> **To do:**
->
-> - [x] Research the problem and solutions to similar problems to identify and justify suitable approaches to a solution.
-> - [ ] **(?)** Describe the essential features of a computational solution explaining these choices.
-> - [x] Explain the limitations of the proposed solution.
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [x] Research the problem and solutions to similar problems to identify and justify suitable approaches to a solution.
+- [ ] **(?)** Describe the essential features of a computational solution explaining these choices.
+- [x] Explain the limitations of the proposed solution.
+
+</details>
 
 When researching how to build my project, the most important decision to be made is what programming language I would choose. This is because an API can be built in many languages, but I need one that can specifically handle image manipulation well and perform quickly and safely while also being robust and well tested. Other things to consider and cross-platform capabilities and the development life-cycle: I don't want a language that is easy to maintain but requires lots of effort to find and fix a bug, or one that requires specialised solutions when deploying to cloud services.
 
@@ -132,6 +151,7 @@ There are a few other packages that I could have picked, such as Resty<sup id="i
 Once a user has sent data to my service, I want to be able to send back an image encoding of their choice, from the select options, such as PNG, SVG and GIF. To do this, and to make image designs (such as colors) the same on each exported type, I will need to use a base image. For this, I am using an SVG, as it's the easiest to create and maintain from a developer's perspective when creating either standard layouts or a master template as an SVG is an XML-based<sup id="i9">[9](#f9)</sup> vector image. This means it can be written as text and then interpreted by the browser (or other software) to output a graphic. SVGs also allow for inline CSS<sup id="i10">[10](#f10)</sup> which will allow for a themeable environment. Such environment will increase the production value of my project as users will be able to create and use colours related to their product or website etc.
 
 For converting the image from an SVG to other encodings I will require an external package. I have done some research and feel that Discord's Go image manipulation package will be sufficient for my needs when encoding an SVG to other codecs.
+
 > Improve this section with further research
 
 #### Carbon
@@ -154,11 +174,11 @@ This will mean that I will have the URLs built as:
 
 Due to the design of Go<sup id="i2">[2](#f2)</sup> and the powerful CLI options, the source-code can be built to run on most architectures, and all well-known ones such as Darwin<sup id="i13">[13](#f13)</sup> (MacOS / iOS<sup id="i14">[14](#f14)</sup>), Linux<sup id="i14">[15](#f15)</sup>, Windows<sup id="i16">[16](#f16)</sup> and FreeBSD<sup id="i17">[17](#f17)</sup>. Sometimes there is a needed addition of a C compiler for architectures such as Android<sup id="i18">[18](#f18)</sup>. It even supports WASM<sup id="i19">[19](#f19)</sup> which allows for Go to be compiled and supported on a browser.
 
-> Explain why cross platform will allow me to deploy it on a server of my chosing easier and cheaply
+> Explain why cross platform will allow me to deploy it on a server of my choosing easier and cheaply
 
 #### Limitations
 
-As far a Go<sup id="i2">[2](#f2)</sup> goes there are very few technical limitations. However, as a project there are a few limitations surrounding the development life-cycle and 'real-world' usage. 
+As far a Go<sup id="i2">[2](#f2)</sup> goes there are very few technical limitations. However, as a project there are a few limitations surrounding the development life-cycle and 'real-world' usage.
 
 These are things such as including rate-limiting<sup id="i20">[20](#f20)</sup> and authorisation<sup id="i21">[21](#f21)</sup> over a public endpoint to reduce server load and prevent DDoS attacks<sup id="i22">[22](#f22)</sup> from overloading the server due to image processing tasks which are resource intensive.
 
@@ -166,10 +186,14 @@ Due to the time constrain of the given period to complete this task, I will not 
 
 ### 3.1.4 Specify the proposed solution
 
-> **To do:**
->
-> - [ ] Specify and justify the solution requirements including hardware and software configuration (if appropriate).
-> - [ ] Identify and justify measurable success criteria for the proposed solution.
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [ ] Specify and justify the solution requirements including hardware and software configuration (if appropriate).
+- [ ] Identify and justify measurable success criteria for the proposed solution.
+
+</details>
 
 #### Project Specification
 
@@ -197,127 +221,190 @@ The ability to recognise when an image is being accessed by a browser using the 
 
 #### Success Criteria
 
-> Todo
+
 
 ## 3.2 Design of the solution
 
-> **To do:**
->
-> - [ ] Broken the problem down systematically into a series of smaller problems suitable for computational solutions, explaining and justifying the process.
-> - [ ] Defined in detail the structure of the solution to be developed.
-> - [ ] Described the solution fully using appropriate and accurate algorithms justifying how these algorithms form a complete solution to the problem.
-> - [ ] Described, justifying choices made, the usability features to be included in the solution.
-> - [ ] Identified and justified the key variables / data structures / classes (as appropriate to the proposed solution) justifying and explaining any necessary validation.
-> - [ ] Identified and justified the test data to be used during the iterative development of the solution.
-> - [ ] Identified and justified any further data to be used in the post development phase.
+<details><summary>Section check list</summary>
 
-> **Notes:**
->
-> - As it says on the tin – design your project. The key here is CODE, CODE, CODE.
-> - You CANNOT get any more than 4 marks in this section unless you have designed the CODE for ALL parts of your project. Again, most projects that do badly will have failed here.
-> - Screen designs, code designs, diagrams, tables of key variables and data structures
+**To do:**
 
-> The default ListenAndServe method uses the default HTTP server. Some of the default values are set to extremely long values or are set to 0 (which disables them). Cloudflare has written an extensive blog post on how to set up a production-ready Go HTTP server and HTTP client. https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
-> 
+- [ ] Broken the problem down systematically into a series of smaller problems suitable for computational solutions, explaining and justifying the process.
+- [ ] Defined in detail the structure of the solution to be developed.
+- [ ] Described the solution fully using appropriate and accurate algorithms justifying how these algorithms form a complete solution to the problem.
+- [ ] Described, justifying choices made, the usability features to be included in the solution.
+- [ ] Identified and justified the key variables / data structures / classes (as appropriate to the proposed solution) justifying and explaining any necessary validation.
+- [ ] Identified and justified the test data to be used during the iterative development of the solution.
+- [ ] Identified and justified any further data to be used in the post development phase.
+
+</details>
+
+<details><summary>Section notes</summary>
+
+**Notes:**
+
+- As it says on the tin – design your project. The key here is CODE, CODE, CODE.
+- You CANNOT get any more than 4 marks in this section unless you have designed the CODE for ALL parts of your project. Again, most projects that do badly will have failed here.
+- Screen designs, code designs, diagrams, tables of key variables and data structures
+
+The default ListenAndServe method uses the default HTTP server. Some of the default values are set to extremely long values or are set to 0 (which disables them). Cloudflare has written an extensive blog post on how to set up a production-ready Go HTTP server and HTTP client. https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
+
+</details>
+
 ### 3.2.1 Decompose the problem
 
-> **To do:**
->
-> - [ ] Break down the problem into smaller parts suitable for computational solutions justifying any decisions made.
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [ ] Break down the problem into smaller parts suitable for computational solutions justifying any decisions made.
+
+</details>
 
 ### 3.2.2 Describe the solution
 
-> **To do:**
->
-> - [ ] Explain and justify the structure of the solution.
-> - [ ] Describe the parts of the solution using algorithms justifying how these algorithms form a complete solution to the problem.
-> - [ ] Describe usability features to be included in the solution.
-> - [ ] Identify key variables / data structures / classes justifying choices and any necessary validation.
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [ ] Explain and justify the structure of the solution.
+- [ ] Describe the parts of the solution using algorithms justifying how these algorithms form a complete solution to the problem.
+- [ ] Describe usability features to be included in the solution.
+- [ ] Identify key variables / data structures / classes justifying choices and any necessary validation.
+
+</details>
 
 ### 3.2.3 Describe the approach to testing
 
-> **To do:**
->
-> - [ ] Identify the test data to be used during the iterative development and post development phases and justify the choice of this test data.
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [ ] Identify the test data to be used during the iterative development and post development phases and justify the choice of this test data.
+
+</details>
 
 ## 3.3 Developing the solution
 
-> **To do:**
->
-> - [ ] Provided evidence of each stage of the iterative development process for a coded solution relating this to the break down of the problem from the analysis stage and explaining what they did and justifying why.
-> - [ ] Provided evidence of prototype versions of their solution for each stage of the process.
-> - [ ] The solution will be well structured and modular in nature.
-> - [ ] Code will be annotated to aid future maintenance of the system.
-> - [ ] All variables and structures will be appropriately named.
-> - [ ] There will be evidence of validation for all key elements of the solution.
-> - [ ] The development will show review at all key stages in the process.
+<details><summary>Section check list</summary>
 
-> **Notes:**
->
-> - Talk through the development of your program
-> - Show you have systematically tested the code you have written as you go along
-> - Do not hide mistakes, talk about them
+**To do:**
+
+- [ ] Provided evidence of each stage of the iterative development process for a coded solution relating this to the break down of the problem from the analysis stage and explaining what they did and justifying why.
+- [ ] Provided evidence of prototype versions of their solution for each stage of the process.
+- [ ] The solution will be well structured and modular in nature.
+- [ ] Code will be annotated to aid future maintenance of the system.
+- [ ] All variables and structures will be appropriately named.
+- [ ] There will be evidence of validation for all key elements of the solution.
+- [ ] The development will show review at all key stages in the process.
+
+</details>
+
+<details><summary>Section notes</summary>
+
+**Notes:**
+
+- Talk through the development of your program
+- Show you have systematically tested the code you have written as you go along
+- Do not hide mistakes, talk about them
+
+</details>
 
 ### 3.3.1 Iterative development process
 
-> **To do:**
->
-> - [ ] Provide annotated evidence of each stage of the iterative development process justifying any decision made.
-> - [ ] Provide annotated evidence of prototype solutions justifying any decision made.
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [ ] Provide annotated evidence of each stage of the iterative development process justifying any decision made.
+- [ ] Provide annotated evidence of prototype solutions justifying any decision made.
+
+</details>
 
 ### 3.3.2 Testing to inform development
 
-> **To do:**
->
-> - [ ] Provide annotated evidence for testing at each stage justifying the reason for the test.
-> - [ ] Provide annotated evidence of any remedial actions taken justifying the decision made.
+<details><summary>Section check list</summary>
 
-> **Notes:**
->
-> - Final, terminal testing to prove you've met the success criteria and objectives you identified in the analysis stage
+**To do:**
+
+- [ ] Provide annotated evidence for testing at each stage justifying the reason for the test.
+- [ ] Provide annotated evidence of any remedial actions taken justifying the decision made.
+
+</details>
+
+<details><summary>Section notes</summary>
+
+**Notes:**
+
+- Final, terminal testing to prove you've met the success criteria and objectives you identified in the analysis stage
+
+</details>
 
 ## 3.4 Evaluation
 
-> **To do:**
->
-> - [ ] Provided annotated evidence of post development testing for function and robustness.
-> - [ ] Provided annotated evidence for usability testing. Used the test evidence to cross reference with the success criteria to evaluate the solution explain how the evidence shows that the criteria has been fully, partially or not met in each case.
-> - [ ] Provided comments on how any partially or unmet criteria could be addressed in further development.
-> - [ ] Provided evidence of the usability features justifying their success, partial success or failure as effective usability features.
-> - [ ] Provided comments on how any issues with partially or unmet usability features could be addressed in further development.
-> - [ ] Considered maintenance issues and limitations of the solution.
-> - [ ] Described how the program could be developed to deal with limitations of potential improvements / changes.
-> - [ ] There is a well developed line of reasoning which is clear and logically structured. The information presented is relevant and substantiated.
+<details><summary>Section check list</summary>
 
-> **Notes:**
->
-> - As you'd expect – how well did the project go?
+**To do:**
+
+- [ ] Provided annotated evidence of post development testing for function and robustness.
+- [ ] Provided annotated evidence for usability testing. Used the test evidence to cross reference with the success criteria to evaluate the solution explain how the evidence shows that the criteria has been fully, partially or not met in each case.
+- [ ] Provided comments on how any partially or unmet criteria could be addressed in further development.
+- [ ] Provided evidence of the usability features justifying their success, partial success or failure as effective usability features.
+- [ ] Provided comments on how any issues with partially or unmet usability features could be addressed in further development.
+- [ ] Considered maintenance issues and limitations of the solution.
+- [ ] Described how the program could be developed to deal with limitations of potential improvements / changes.
+- [ ] There is a well developed line of reasoning which is clear and logically structured. The information presented is relevant and substantiated.
+
+</details>
+<details><summary>Section notes</summary>
+
+**Notes:**
+
+- As you'd expect – how well did the project go?
+
+</details>
 
 ### 3.4.1 Testing to inform evaluation
 
-> **To do:**
->
-> - [ ] Provide annotated evidence of testing the solution of robustness at the end of the development process.
-> - [ ] Provide annotated evidence of usability testing (user feedback).
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [ ] Provide annotated evidence of testing the solution of robustness at the end of the development process.
+- [ ] Provide annotated evidence of usability testing (user feedback).
+
+</details>
 
 ### 3.4.2 Success of the solution
 
-> **To do:**
->
-> - [ ] Use the test evidence from the development and post development process to evaluate the solution against the success criteria from the analysis.
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [ ] Use the test evidence from the development and post development process to evaluate the solution against the success criteria from the analysis.
+
+</details>
 
 ### 3.4.3 Describe the final product
 
-> **To do:**
->
-> - [ ] Provide annotated evidence of the usability features from the design, commenting on their effectiveness.
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [ ] Provide annotated evidence of the usability features from the design, commenting on their effectiveness.
+
+</details>
 
 ### 3.4.4 Maintenance and development
 
-> **To do:**
->
-> - [ ] Discuss the maintainability of the solution.
-> - [ ] Discuss potential further development of the solution.
+<details><summary>Section check list</summary>
+
+**To do:**
+
+- [ ] Discuss the maintainability of the solution.
+- [ ] Discuss potential further development of the solution.
+
+</details>
 
 ## Footnotes
 
