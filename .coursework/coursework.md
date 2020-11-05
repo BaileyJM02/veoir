@@ -221,6 +221,27 @@ The ability to recognise when an image is being accessed by a browser using the 
 
 #### Success Criteria
 
+1. Can the user login using their own correct credentials?
+
+This is important as a use will need to login to retrieve their token to securely access the API. This helps me monitor errors and usage to help scale the program in the future.
+
+2. Can the user upload their own input to be displayed?
+
+This is an important as the functionality of the project is to allow the user to input their own code and allow it to be shown is a format accessible by most people.
+
+3. Does the image redirect to the code when opened in a browser?
+
+This is to achieve the goal of allowing a more accessible service fixing the issue of accessibility when a user requires the code provided in the image but is unable to either copy or edit it.
+
+4. Are unauthorised users blocked from using the service?
+
+Although the service is free and open, a user is required to hold a token to access the system as this prevents excessive usage. This should be checked as in the future it could be used to track errors and prevent API abuse.
+
+5. Are the image sizes appropriate for social media websites?
+6. Does the end product satisfy the stakeholders?
+7. Are there any errors during a normal usecase that prevent usage?
+8. Are all forms safe from SQL-style injections including time-bound attacks?
+9. Is the image capable of being returned in more than one format?
 
 
 ## 3.2 Design of the solution
