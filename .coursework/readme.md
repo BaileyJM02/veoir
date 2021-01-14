@@ -221,6 +221,76 @@ The ability to recognise when an image is being accessed by a browser using the 
 
 #### Success Criteria
 
+1. Can the user login using their own correct credentials?
+
+This is important as a use will need to login to retrieve their token to securely access the API. This helps me monitor errors and usage to help scale the program in the future.
+
+2. Can the user upload their own input to be displayed?
+
+This is an important as the functionality of the project is to allow the user to input their own code and allow it to be shown is a format accessible by most people.
+
+3. Does the image redirect to the code when opened in a browser?
+
+This is to achieve the goal of allowing a more accessible service fixing the issue of accessibility when a user requires the code provided in the image but is unable to either copy or edit it.
+
+4. Are unauthorised users blocked from using the service?
+
+Although the service is free and open, a user is required to hold a token to access the system as this prevents excessive usage. This should be checked as in the future it could be used to track errors and prevent API abuse.
+
+5. Are the image sizes appropriate for social media websites?
+
+I aim to allow sizes for Facebook, Twitter, Instagram, YouTube, GitHub and Linkedin. Which are as follows:
+
+- Facebook:
+  - cover photo size: 820 x 462 pixels
+  - Link image size: 1200 x 630 pixels
+  - Image post size: 1200 x 630 pixels
+  - Event image size: 1920 x 1080 pixels
+  - Ad size: 1200 x 628 pixels
+  - Story ad size: 1080 x 1920 pixels
+  - Group cover image size: 1640 x 922 pixels
+  - Messenger image ad size: 1200 x 628 pixels
+- Twitter:
+  - Header size: 1500 x 500 pixels
+  - Post image size: 1024 x 512 pixels
+  - Card image size: 1200 x 628 pixels
+  - Ad size: 800 x 428 pixels
+- Instagram:
+  - Photo sizes:
+    - Square: 1080 x 1080 pixels
+    - Landscape: 1080 x 566 pixels
+    - Portrait: 1080 x 1350 pixels
+  - Stories size: 1080 x 1920 pixels
+  - Minimum image ad size: 500 pixels wide
+  - ads size:
+    - Square: 1080 x 1080 pixels
+    - Landscape: 1080 x 566 pixels
+- YouTube:
+    - Channel cover picture:
+      - Desktop: 2560 x 1440 pixels
+      - Smartphones 1546 x 423 pixels
+    - Display ads: 300 x 250 pixels
+    - Companion banner ads: 300 x 250 pixels
+    - Standard video: 1280 x 760 pixels
+- Github:
+  - Repository header: 1280×640 pixels
+- Linkedin:
+  - Company pages:
+    - Cover photo size: 1536 x 768 pixels
+    - Sponsored Content image size: 1200 x 627 pixels
+    - Hero image size: 1128 x 376 pixels
+    - Business Banner image: 646 x 220 pixels
+  - Personal pages:
+    - Background photo size: 1584 x 396 pixels
+    - Post image size:
+      - Desktop: 1200 x 1200 pixels
+      - Mobile: 1200 x 628 pixels
+    - Link post size: 1200 x 628 pixels
+
+6. Does the end product satisfy the stakeholders?
+7. Are there any errors during a normal usecase that prevent usage?
+8. Are all forms safe from SQL-style injections including time-bound attacks?
+9. Is the image capable of being returned in more than one format?
 
 
 ## 3.2 Design of the solution
