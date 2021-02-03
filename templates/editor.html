@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>Editor</title>
+    <meta charset="UTF-8" />
+    <style>
+        textarea {
+            width: 50vw;
+            max-width: 80vw;
+            height: 25vw;
+            max-height: 80vh;
+        }
+    </style>
+</head>
+
+<body>
+    {{ if .Hash}}
+    <h1>Image: {{ .Hash }} ({{ .Encodings }})</h1>
+    {{ else }}
+    <h1>New Image</h1>
+    {{ end }}
+    <form id="editor">
+        <textarea id="code" name="code">{{ .Payload }}</textarea>
+        <select id="theme" name="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+        <input type="submit" value="Generate Images">
+    </form>
+    <div id="listOfURLS"></div>
+    <script>
+        function sendData() {
+            const XHR = new XMLHttpRequest();
+            // Bind the FormData object and the form element
+            const FD = new FormData(form);
+            // Define what happens on successful data submission
+            XHR.addEventListener("load", function (event) {
+                ul = document.createElement('ul');
+                document.getElementById('listOfURLS').appendChild(ul);
+
+                JSON.parse(event.target.responseText).forEach(function (item) {
+                    let li = document.createElement('li');
+                    ul.appendChild(li);
+
+                    li.innerHTML += "<a target='_blank' href="+item+">"+item+"</a>";
+                });
+            });
+            // Define what happens in case of error
+            XHR.addEventListener("error", function (event) {
+                alert('Oops! Something went wrong.');
+            });
+            // Set up our request
+            XHR.open("POST", "/api/v1/create", true);
+            XHR.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            XHR.setRequestHeader("X-Veoir-Image-Theme", FD.get("theme"));
+
+            // The data sent is what the user provided in the form
+            XHR.send(FD.get("code"));
+        }
+
+        // Access the form element...
+        const form = document.getElementById("editor");
+        // ...and take over its submit event.
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            sendData();
+        });
+    </script>
+</body>
+
+</html>
