@@ -5,23 +5,58 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
-  watch:
-    types: [started]
-
+    
 jobs:
-  build:
-    name: Build PDF
+  check:
+    name: Check changes
+    outputs:
+      run_job: ${{ steps.check_files.outputs.run_job }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: baileyjm02/markdown-to-pdf@master
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Check if coursework was modified
+        id: check_files
+        run: |
+          echo "=============== list modified files ==============="
+          git diff --name-only HEAD^ HEAD
+          
+          echo "========== check paths of modified files =========="
+          git diff --name-only HEAD^ HEAD > files.txt
+          while IFS= read -r file
+          do
+            echo $file
+            if [[ $file != .coursework/* ]]; then
+              echo "No changes to coursework."
+              echo "::set-output name=run_job::false"
+              break
+            else
+              echo "Some changes to coursework."
+              echo "::set-output name=run_job::true"
+            fi
+          done < files.txt
+
+  build:
+    name: Build PDF
+    needs: check
+    if: needs.check.outputs.run_job == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build PDF
+        uses: baileyjm02/markdown-to-pdf@master
         if: github.ref == 'refs/heads/master'
         with:
           input_dir: .coursework
           output_dir: .coursework
           images_dir: .coursework/images
           image_import: ./images
-      - uses: actions/upload-artifact@v1
+      - name: Upload PDF
+        uses: actions/upload-artifact@v1
         with:
           name: veoir-coursework
           path: .coursework
