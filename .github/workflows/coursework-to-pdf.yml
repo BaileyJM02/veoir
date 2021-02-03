@@ -2,11 +2,11 @@ name: Coursework PDF
 # This workflow is triggered on pushes to the repository.
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
   watch:
-    types: [ started ]
+    types: [started]
 
 jobs:
   build:
