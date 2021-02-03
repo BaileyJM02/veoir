@@ -5,7 +5,7 @@ By Bailey Matthews (2020)
 - [Veoir Coursework](#veoir-coursework)
   - [3.1 Analysis of the problem](#31-analysis-of-the-problem)
     - [3.1.1 Problem identification](#311-problem-identification)
-    - [**3.1.2** Stakeholders](#312-stakeholders)
+    - [3.1.2 Stakeholders](#312-stakeholders)
     - [3.1.3 Research the problem](#313-research-the-problem)
       - [Language](#language)
       - [External Language Packages](#external-language-packages)
@@ -68,7 +68,7 @@ There are several factors that make this problem suitable for being solved with 
 
 The structure of my project, being an API, means that object-oriented programming will be suitable. This is largely given to the event-driven architecture an API possesses, but also allows a key goal of standardisation to be achieved. In addition, inheritance and polymorphism are more computational methods that can be used in order to build on top of the base class for an input by allowing different themes to be selected and different outputs such as different file formats that may require specialised properties and functions. These methods will allow me to follow a modular approach when developing my project and will aid development of new features as well as improve readability.
 
-### **3.1.2** Stakeholders
+### 3.1.2 Stakeholders
 
 In my opinion, the main stakeholders for my project will be general developers, but more inclined to those who write tutorials and have a large social-media influence, where writing and showing appealing content is important to them and their audience. I also feel that it would have a positive impact on people writing documentation or including small examples of how their project can be used.
 
@@ -242,7 +242,7 @@ The website will contain two main pages, an input page where a user can upload t
 
 Between both pages, only the body section will change. This helps create a streamlined experience while maintaining a known layout for the user and allows for all the needed information to be shown. The process for the following pages for the user are below, there are two processes available from within the editor page, depending on if they edit the content and would like to create a new image.
 
-![image-20210201115148627](images/image-20210201115148627.png)
+![image-20210201115148627](./images/image-20210201115148627.png)
 
 I have chosen to allow a user to edit the content of a created image as it allows for a more powerful workflow where bugs within code can be fixed and shared easily.
 
@@ -283,7 +283,7 @@ func main() {
 
 
 
-![image-20210130155520497](images/image-20210130155520497.png)
+![image-20210130155520497](./images/image-20210130155520497.png)
 
 #### Engine Package
 
@@ -383,7 +383,7 @@ The queue package I will be implementing at the moment will be a simple design u
 
 In my project, I am planning on using the following structure from the figure below for my queue structure. In this structure, the HTTP request handler ('Handler') is the centre node which sends and receives requests from both the Catalogue package and the encoding engine packages. This allows it to orchestrate the cycle of events by utilising the queues and waiting for values to be returned. At the moment this will all have to take place within one project but using techniques mentioned above, this could be split over multiple nodes or servers using the queues as a communication structure.
 
-<img src="images/image-20210130155908551.png" alt="image-20210130155908551" style="zoom: 50%;" />
+<img src="./images/image-20210130155908551.png" alt="image-20210130155908551" style="zoom: 50%;" />
 
 The code for a queue to be created by one of the sub-packages will look like so:
 
@@ -1199,7 +1199,7 @@ func main() {
 }
 ```
 
-![image-20210202173147003](images/image-20210202173147003.png)
+![image-20210202173147003](./images/image-20210202173147003.png)
 
 Next, I need to incorporate this into a template. For now, I am going to keep the template really simple and use the following, with little styling:
 
@@ -1245,7 +1245,7 @@ We can then use the following code to fetch the template and populate it with th
 
 Which now shows the following when I visit `/editor/test/`, this is good enough for now and I can now expand this using JavaScript to interact with our API.
 
-![image-20210202174220066](images/image-20210202174220066.png)
+![image-20210202174220066](./images/image-20210202174220066.png)
 
 For a useful response for our `EngineHandler` as I create the interactions, I have updated the handler to return the body sent when it is accessed via a POST request. The code for this:
 
@@ -1320,11 +1320,11 @@ Now I need to create the JavaScript within the HTML to send a post request to th
 </html>
 ```
 
-![image-20210202180323820](images/image-20210202180323820.png)
+![image-20210202180323820](./images/image-20210202180323820.png)
 
 This shows me that the request is being made successfully to the server. To finalise this, I will update the data received from the API to emulate the JSON object we expect to be returned. I will also add a theme dropdown with a `light` and `dark` value. After these chances, the output after "Generate Images" had been selected was:
 
-![image-20210202181805644](images/image-20210202181805644.png)
+![image-20210202181805644](./images/image-20210202181805644.png)
 
 This is because the JavaScript was updated to the following where the `XHR.addEventListener("load", function (event) {})` function creates a list of links from the array returned by the API.
 
@@ -1392,7 +1392,7 @@ With a slight amendment to the HTM file, I can prevent the empty `Image: ([])` v
 
 The index page now looks like:
 
-![image-20210202191328856](images/image-20210202191328856.png)
+![image-20210202191328856](./images/image-20210202191328856.png)
 
 Now we have almost complete the router package, we just need to write the `EngineHandler` function. This will handle the `/api/v1/create` route and will take 2 main parameters; the theme and the code. The theme is set via a header with the title `X-Veoir-Image-Theme` and the code is sent as the `req.Body`. 
 
@@ -1565,7 +1565,7 @@ func drawImage(w io.Writer, lines []string, bg, box, text string) {
 
 The first couple of lines loop through the list of lines to find which is the longest. This is important as it allows us to set our width value as to ensure no text is cut off. I then times the width by 10 to ensure that it matches the pixel value width of the longest line, adding 100 as padding. These values are all equal to pixels so the 100 I added is 100 pixels. The height is number of lines times 26, plus thirty. This is because each line is roughly 22 pixels tall, so we need to ensure this height, plus some extra for padding. I then initiate the SVG package and write the generated contents to the file via `w` which is the writer. After this, I create the canvas with the height and width and then create the background setting the colour. Next, I create a rectangle behind the code to act as a window using the divisions to create a boarder around this rectangle. There circles are added in the top-right for good looks and I then print the Text using a for loop. This increments the value of pixels above the text by 20px each iteration after a padding of (height/10)+35 to ensure each line is printed as a user would expect. Using this, and the code within, it creates an image like so:
 
-![image-20210202204823631](images/image-20210202204823631.png)
+![image-20210202204823631](./images/image-20210202204823631.png)
 
 As you can see, in the code we copied there was some level of indentation, however here it is lost. To fix this, I need to alter the code slightly. I have amended the following lines to count a tab (`\t`) as 4 characters instead of 1, and this also forces the text to be printed with an ident as I draw it slightly more to the right.
 
@@ -1582,7 +1582,7 @@ canvas.Text((height/10)+20+(strings.Count(line, "\t")*16), .......
 
 Running the code again reusing the previous input produces an output of the image below.
 
-![image-20210202205811151](images/image-20210202205811151.png)
+![image-20210202205811151](./images/image-20210202205811151.png)
 
 #### Engine PNG Package
 
