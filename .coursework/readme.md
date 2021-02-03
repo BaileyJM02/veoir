@@ -664,13 +664,13 @@ The types package doesn't contain any importable functions and instead includes 
 
 ### 3.2.3 Describe the approach to testing
 
-|                      Case                      |                                    Test Procedure                                    |                                  Expected Outcome                                  |                                                                               Justification                                                                               |
-| :--------------------------------------------: | :----------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                API Create Image                |                I will call the API with the correct headers and body.                | That data returned is a JSON object and the included links and images are created. | This is very important as this process will ensure the images are being created correctly. This step is crucial as the webpages also use this API when generating images. |
-|                  Visit Index                   |                       I will open the route URL in a browser.                        |      That I am shown the HTML page parsed from the index.html template file.       |                                         This will allow user to view my service and they can continue to create an image if need.                                         |
-|             Create Image via Index             |                    I will use the index page to create an image.                     |       That an image is created and I am shown the links to the image files.        |                          This will allow user to interact with my service without technical knowledge of the API or how to create a call to it.                           |
-| Fetch the image from a non-browser user-agent. | Make a request to the image via software that does not contain a browser user-agent. |            That an image header is returned and the image is returned,             |                                                 This ensures is can be included on websites without any unknow behaviour.                                                 |
-|   Fetch the image from a browser user-agent.   |                           Open the image URL in a browser.                           |                        I am redirected to the editor page.                         |                                          This is a fundamental feature that differentiates my product from other similar tools.                                           |
+|                      Case                      |                        Test Procedure                        |                       Expected Outcome                       |                        Justification                         |
+| :--------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+|                API Create Image                |    I will call the API with the correct headers and body.    | That data returned is a JSON object and the included links and images are created. | This is very important as this process will ensure the images are being created correctly. This step is crucial as the webpages also use this API when generating images. |
+|                  Visit Index                   |           I will open the route URL in a browser.            | That I am shown the HTML page parsed from the index.html template file. | This will allow user to view my service and they can continue to create an image if need. |
+|             Create Image via Index             |        I will use the index page to create an image.         | That an image is created and I am shown the links to the image files. | This will allow user to interact with my service without technical knowledge of the API or how to create a call to it. |
+| Fetch the image from a non-browser user-agent. | Make a request to the image via software that does not contain a browser user-agent. | That an image header is returned and the image is returned,  | This ensures is can be included on websites without any unknow behaviour. |
+|   Fetch the image from a browser user-agent.   |               Open the image URL in a browser.               |             I am redirected to the editor page.              | This is a fundamental feature that differentiates my product from other similar tools. |
 
 
 
@@ -1068,9 +1068,9 @@ This is working as expected.
 
 Next, we need to edit the `BrowserHandler` to check if the `user-agent` provided is from a browser or another service in order for our redirections to work. To do this, I first decided to output the user agent I receive for Postman (not browser), Brave (Browser) and a webpage with the image route embedded. I check this last one as we don't want to redirect the user to the editor page if the link is in fact embedded as an image in a webpage.
 
-| Accessed From  |                                                     User Agent                                                     |
-| :------------: | :----------------------------------------------------------------------------------------------------------------: |
-|    Postman     |                                               PostmanRuntime/7.26.8                                                |
+| Accessed From  |                          User Agent                          |
+| :------------: | :----------------------------------------------------------: |
+|    Postman     |                    PostmanRuntime/7.26.8                     |
 |     Brave      | Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36 |
 | Brave via HTML | Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36 |
 
