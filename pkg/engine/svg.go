@@ -2,15 +2,25 @@ package engine
 
 import (
 	"fmt"
-	"io"
-	"io/ioutil"
+	"image/color"
 	"os"
 	"strings"
 
-	svg "github.com/ajstarks/svgo"
 	"github.com/baileyjm02/veoir/pkg/queue"
 	"github.com/baileyjm02/veoir/pkg/types"
 	"github.com/sirupsen/logrus"
+	"github.com/tdewolff/canvas"
+	"github.com/tdewolff/canvas/svg"
+)
+
+var (
+	builtCanvas *canvas.Canvas
+	fontFamily  *canvas.FontFamily
+	nicePurple  = color.RGBA{0xE6, 0xE6, 0xFA, 0xff}
+	niceBlue    = color.RGBA{0x49, 0x46, 0x80, 0xff}
+	tomato      = color.RGBA{0xFF, 0x63, 0x47, 0xff}
+	yellow      = color.RGBA{0xE6, 0xDF, 0x00, 0xff}
+	green       = color.RGBA{0x94, 0xFF, 0x00, 0xff}
 )
 
 // StartSVGQueue subscribes to the SVG event channel
@@ -37,44 +47,64 @@ func BuildSVG(image types.Image) {
 	}
 	defer file.Close()
 
-	if image.Theme == "light" {
-		drawImage(file, lines, "#E6E6FA", "#fff", "#000")
-	} else {
-		drawImage(file, lines, "#a4a4a4", "#000", "#fff")
+	fontFamily = canvas.NewFontFamily("times")
+	fontFamily.Use(canvas.CommonLigatures)
+	if err := fontFamily.LoadFontFile("JetBrainsMono.ttf", canvas.FontRegular); err != nil {
+		panic(err)
 	}
 
-	bytes, err := ioutil.ReadAll(file)
+	if image.Theme == "light" {
+		builtCanvas = drawImage(lines, nicePurple, color.White, color.Black)
+	} else {
+		builtCanvas = drawImage(lines, niceBlue, color.Black, color.White)
+	}
+
+	image.Canvas = *builtCanvas
+	go queue.Queues.Publish("engine.png", image)
+
+	err = svg.Writer(file, builtCanvas)
 	if err != nil {
 		logrus.Error(err)
 		return
 	}
-
-	image.Payload = string(bytes)
-
-	queue.Queues.Publish("engine.png", image)
-
 	logrus.Infof("SVG %v created.", image.Hash)
 }
 
-func drawImage(w io.Writer, lines []string, bg, box, text string) {
-	width := 0
+func drawImage(lines []string, bg, box, text color.Color) *canvas.Canvas {
+	intWidth := 0
 	for _, line := range lines {
-		length := (strings.Count(line, "\t") * 2) + len(line)
-		if length > width {
-			width = length
+		length := (strings.Count(line, "\t") * 6) + len(line)
+		if length > intWidth {
+			intWidth = length
 		}
 	}
-	width = (width * 10) + 100
-	height := (len(lines) * 26) + 30
-	canvas := svg.New(w)
-	canvas.Start(width, height)
-	canvas.Rect(0, 0, width, height, "fill:"+bg)
-	canvas.Roundrect(height/10, height/10, width-(2*(height/10)), height-(2*(height/10)), 12, 12, "fill:"+box)
-	canvas.Circle(width-(height/10)-15, (height/10)+14, 6, "fill:tomato")
-	canvas.Circle(width-(height/10)-30, (height/10)+14, 6, "fill:#FFDF00")
-	canvas.Circle(width-(height/10)-45, (height/10)+14, 6, "fill:lime")
+	width := float64((intWidth * 6) + 100)
+	height := float64((len(lines) * 17) + 45)
+
+	ctx := canvas.New(float64(width), float64(height))
+	c := canvas.NewContext(ctx)
+
+	face := fontFamily.Face(30.0, text, canvas.FontRegular, canvas.FontNormal)
+	rect := canvas.Rectangle(width+10, height+10)
+	inner := canvas.RoundedRectangle(width-(2*(height/10)), height-(2*(height/10)), 12.0)
+	circle := canvas.Circle(6.0)
+	c.SetFillColor(bg)
+	c.DrawPath(0, 0, rect)
+	c.SetFillColor(box)
+	c.DrawPath(height/10, height/10, inner)
+	c.SetFillColor(tomato)
+	c.DrawPath(width-(height/10)-12, height-(height/10)-12, circle)
+	c.SetFillColor(yellow)
+	c.DrawPath(width-(height/10)-28, height-(height/10)-12, circle)
+	c.SetFillColor(green)
+	c.DrawPath(width-(height/10)-44, height-(height/10)-12, circle)
 	for i, line := range lines {
-		canvas.Text((height/10)+20+(strings.Count(line, "\t")*16), (height/10)+35+(i*20), line, "font-family:'JetBrains Mono';font-size:16px;fill:"+text)
+		_ = i
+		x := (height / 10.0) + 10.0 + (float64(strings.Count(line, "\t")) * 8.0)
+		y := height - (height / 10) - 35.0 - (float64(i) * 13.7)
+		text := canvas.NewTextLine(face, strings.ReplaceAll(line, "\t", ""), canvas.Left)
+		c.DrawText(float64(x), float64(y), text)
 	}
-	canvas.End()
+
+	return ctx
 }
