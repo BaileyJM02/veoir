@@ -86,7 +86,6 @@ func drawImage(lines []string, bg, box, text color.Color) *canvas.Canvas {
 			intWidth = length
 		}
 	}
-
 	// Generate the width and the height of the element
 	width := float64((intWidth * 6) + 100)
 	height := float64((len(lines) * 14) + 80)
