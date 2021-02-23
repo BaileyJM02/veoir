@@ -44,12 +44,43 @@ By Bailey Matthews (2020)
       - [Catalogue Package](#catalogue-package-1)
       - [Engine SVG Package](#engine-svg-package)
       - [Engine PNG Package](#engine-png-package)
+      - [Engine SVG Package - Attempt Two](#engine-svg-package---attempt-two)
+      - [Engine PNG Package - Attempt Two](#engine-png-package---attempt-two)
     - [3.3.2 Testing to inform development](#332-testing-to-inform-development)
+        - [Desktop](#desktop)
+        - [Server](#server)
+      - [Expected Inputs](#expected-inputs)
+      - [Strange Aspect Ratios](#strange-aspect-ratios)
+      - [Larger Inputs](#larger-inputs)
+        - [Input (text)](#input-text)
+        - [Output (image)](#output-image)
+        - [Outcome](#outcome)
+        - [Input (text)](#input-text-1)
+        - [Output (image)](#output-image-1)
+        - [Outcome](#outcome-1)
+        - [Input (text)](#input-text-2)
+        - [Output (image)](#output-image-2)
+        - [Outcome](#outcome-2)
+        - [Input (text)](#input-text-3)
+        - [Output (image)](#output-image-3)
+        - [Outcome](#outcome-3)
+      - [Strange Aspect Ratios - Test Two](#strange-aspect-ratios---test-two)
+      - [Programmatic Errors](#programmatic-errors)
   - [3.4 Evaluation](#34-evaluation)
-    - [3.4.1 Testing to inform evaluation](#341-testing-to-inform-evaluation)
     - [3.4.2 Success of the solution](#342-success-of-the-solution)
+      - [Can the user access their image after creation?](#can-the-user-access-their-image-after-creation)
+      - [Can the user upload their own input to be displayed?](#can-the-user-upload-their-own-input-to-be-displayed)
+      - [Does the image redirect to the code when opened in a browser?](#does-the-image-redirect-to-the-code-when-opened-in-a-browser)
+      - [Are the image sizes appropriate for social media websites?](#are-the-image-sizes-appropriate-for-social-media-websites)
+      - [Does the end product satisfy the stakeholders?](#does-the-end-product-satisfy-the-stakeholders)
+        - [User One](#user-one)
+        - [User Two](#user-two)
+        - [Overall](#overall)
+      - [Are there any errors during a normal use case that prevent usage?](#are-there-any-errors-during-a-normal-use-case-that-prevent-usage)
+      - [Is the image capable of being returned in more than one format?](#is-the-image-capable-of-being-returned-in-more-than-one-format)
+      - [Is the website suitable and easy to use?](#is-the-website-suitable-and-easy-to-use)
     - [3.4.3 Describe the final product](#343-describe-the-final-product)
-    - [3.4.4 Maintenance and development](#344-maintenance-and-development)
+    - [3.4.4 Maintenance and Development](#344-maintenance-and-development)
   - [Footnotes](#footnotes)
 
 ## 3.1 Analysis of the problem
@@ -84,17 +115,17 @@ When researching how to build my project, the most important decision to be made
 
 #### Language
 
-For my project, I will be using Go<sup id="i2">[2](#f2)</sup> as this is a strongly typed language. This helps maintain a clear structure as, for example, we can assign variables to a type and they can contain only that type, attempting to assign this variable to another type fails at compile-time. This ensures that no type errors occur during run-time, other than within edge cases. Go also allows us to define fields and methods in `structs`<sup id="i3">[3](#f3)</sup> and `interfaces`<sup id="i4">[4](#f4)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i5">[5](#f5)</sup> and `net/http`<sup id="i6">[6](#f6)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests. There are however a few changes to the default `net/http`<sup id="i6">[6](#f6)</sup> package that need to be changed in order for my Go program to become 'production ready' and correctly handle a large number of requests. This is discussed in detail within section [3.2](#32-design-of-the-solution).
+For my project, I will be using Go<sup id="i2">[2](#f2)</sup> as this is a strongly typed language. This helps maintain a clear structure as, for example, we can assign variables to a type and they can contain only that type, attempting to assign this variable to another type fails at compile-time. This ensures that no type errors occur during run-time, other than within edge cases. Go also allows us to define fields and methods in `structs`<sup id="i3">[3](#f3)</sup> and `interfaces`<sup id="i4">[4](#f4)</sup> which are easily compatible with JSON when using the `encoding/json`<sup id="i5">[5](#f5)</sup> and `net/http`<sup id="i6">[6](#f6)</sup> packages. This will be very helpful when developing the API as Go has very useful core packages to help create an HTTP server that can receive requests. There are however a few changes to the default `net/http` package that need to be changed in order for my Go program to become 'production ready' and correctly handle a large number of requests. This is discussed in detail within section [3.2](#32-design-of-the-solution).
 
-Other advantages of Go is that it offers a growing community of support and due to the language being openly developed and used by Google since it first appeared in November 2009, there is an abundance of questions relating to specific topics on forums or question asking sites such as StackOverflow. Go also offers memory safety<sup id="ix">[x](#fx)</sup>, garbage collection<sup id="ix">[x](#fx)</sup> and concurrency<sup id="ix">[x](#fx)</sup> which are extremely useful when developing in said language as it ensures that there are lower chances for memory leaks and if the program is written correctly the garbage collection will ensure that a lower amount of memory is used. This lowers cost for hardware and is a very practical solution.
+Other advantages of Go is that it offers a growing community of support and due to the language being openly developed and used by Google since it first appeared in November 2009, there is an abundance of questions relating to specific topics on forums or question asking sites such as StackOverflow. Go also offers memory safety, garbage collection<sup id="i7">[7](#f7)</sup> and concurrency<sup id="i8">[8](#f8)</sup> which are extremely useful when developing in said language as it ensures that there are lower chances for memory leaks and if the program is written correctly the garbage collection will ensure that a lower amount of memory is used. This lowers cost for hardware and is a very practical solution.
 
 Built in testing is also another factor which I find a huge benefit within Go as it ensures that all code can be easily tested, but eliminates the complicated setup of integrating a third-party testing service into the development life-cycle. Finally, auto-generated technical documentation for all packages created in Go on their website allows for not only my program to be well documented but for all packages I import and use to be well documented.
 
-Other languages I considered where Python<sup id="ix">[x](#fx)</sup>, PHP<sup id="ix">[x](#fx)</sup> and JavaScript<sup id="ix">[x](#fx)</sup> (using the V8 JavaScript engine<sup id="ix">[x](#fx)</sup> within NodeJS<sup id="ix">[x](#fx)</sup>). I know Python very well and it has a large support community as well as good documentation however the increased use of whitespace highlights a development issues as it becomes increasingly hard to debug an issue on larger files when whitespace is the only way to change the runtime hierarchy of the code. It is in my personal opinion that I think the whitespace removes readability rather than increases it. Another factor of Python is that it is mainly a loosely typed and interpreted language at runtime, and to ensure it is compiled it requires further steps within the development cycle that are just not needed within Go.
+Other languages I considered where Python<sup id="i9">[9](#f9)</sup>, PHP<sup id="i10">[10](#f10)</sup> and JavaScript<sup id="i11">[11](#f11)</sup> (using the V8 JavaScript engine<sup id="i12">[12](#f12)</sup> within NodeJS<sup id="i13">[13](#f13)</sup>). I know Python very well and it has a large support community as well as good documentation however the increased use of whitespace highlights a development issues as it becomes increasingly hard to debug an issue on larger files when whitespace is the only way to change the runtime hierarchy of the code. It is in my personal opinion that I think the whitespace removes readability rather than increases it. Another factor of Python is that it is mainly a loosely typed and interpreted language at runtime, and to ensure it is compiled it requires further steps within the development cycle that are just not needed within Go.
 
 PHP is another alternative that I considered, it has a large developer following, it is much more mature than Go, as it was created in 1994, and it has an abundance of frameworks to ensure that API development is easy. Another plus is that PHP can be used for the whole development stack: frontend and backend, without much extra work. The big negative is that is an interpreted language, which means I can not use the compiler to check if I have made any 'silly' errors, such as a misplacement of a variable until the code is run within the program. To combat this I could use tests but PHP requires a large amount of work to use tests, and to ensure good testing I would be forced to reply upon existing frameworks which may reach end-of-life due to the third-party nature of such applications.
 
-Lastly, I considered JavaScript to be another good alternative as with NodeJS (Or more recently Deno<sup id="ix">[x](#fx)</sup>) it allows for easy server-side development and frontend development in one codebase. However, I find that I would need to use a language like Typescript<sup id="ix">[x](#fx)</sup> to ensure that my JavaScript code was strictly typed. This would add further complication to the development life-cycle and require the knowledge of a separate language (TypeScript) to code my project. The reason I would not use JavaScript on its own is the lack of structure I feel the types have. For example:
+Lastly, I considered JavaScript to be another good alternative as with NodeJS (Or more recently Deno<sup id="i14">[14](#f14)</sup>) it allows for easy server-side development and frontend development in one codebase. However, I find that I would need to use a language like Typescript<sup id="i15">[15](#f15)</sup> to ensure that my JavaScript code was strictly typed. This would add further complication to the development life-cycle and require the knowledge of a separate language (TypeScript) to code my project. The reason I would not use JavaScript on its own is the lack of structure I feel the types have. For example:
 
 - `[]` and `![]` are both equal. Further more, `!![]` returns `true` meaning that removing the contradicting double exclamation mark, 'not not' should mean that `[]` still equals `true`, but it in-fact equals `false`
 - `NaN` which stands for 'Not a Number', is in-fact interpreted as a number.
@@ -103,25 +134,23 @@ These are just two examples but I feel that it would increase the time spent try
 
 #### External Language Packages
 
-Although Go has a vast number of core packages, including a `net/http`<sup id="i6">[6](#f6)</sup> package for handling requests over the http protocol, there are also a vast number of user created packages that extend the default packages. For my project, I will be using Julien Schmidt's<sup id="i7">[7](#f7)</sup> `HttpRouter`<sup id="i8">[8](#f8)</sup> library that is still low level, therefor quick, but adds important features such as a built-in routing pattern that allows for HTTP paths to be easily created and improves readability within the code.
+Although Go has a vast number of core packages, including a `net/http` package for handling requests over the http protocol, there are also a vast number of user created packages that extend the default packages. For my project, I will be using Julien Schmidt's<sup id="i16">[16](#f16)</sup> `HttpRouter`<sup id="i17">[17](#f17)</sup> library that is still low level, therefore quick, but adds important features such as a built-in routing pattern that allows for HTTP paths to be easily created and improves readability within the code.
 
-There are a few other packages that I could have picked, such as Resty<sup id="ix">[x](#fx)</sup>, go-http-client<sup id="ix">[x](#fx)</sup> and Gentleman<sup id="ix">[x](#fx)</sup>. The reasons for not picking Resty and Gentleman are they they are more of a separate package meant to overlay the core `net/http` package that Go provides. I do not want this as it adds unnecessary complication to my application but also increases the development risk of such a package becoming unmaintained and therefor requiring more time in the future. The reason I chose HttpRouter over go-http-client is that go-http-client is a relatively new package with a single maintainer. This means it could change quickly and abruptly due to the discretion of the maintainer and break my application. The singe maintainer could also lose interest and abandon the package. Requiring me to move to a new one anyway. There is also no overwhelming differences or features that go-http-client has and HttpRouter doesn't. Therefor I decided to go with the safer option.
+There are a few other packages that I could have picked, such as Resty<sup id="i18">[18](#f18)</sup>, go-http-client<sup id="i19">[19](#f19)</sup> and Gentleman<sup id="i20">[20](#f20)</sup>. The reasons for not picking Resty and Gentleman are they they are more of a separate package meant to overlay the core `net/http` package that Go provides. I do not want this as it adds unnecessary complication to my application but also increases the development risk of such a package becoming unmaintained and therefor requiring more time in the future. The reason I chose HttpRouter over go-http-client is that go-http-client is a relatively new package with a single maintainer. This means it could change quickly and abruptly due to the discretion of the maintainer and break my application. The singe maintainer could also lose interest and abandon the package. Requiring me to move to a new one anyway. There is also no overwhelming differences or features that go-http-client has and HttpRouter doesn't. Therefor I decided to go with the safer option.
 
 #### Curated Image
 
-Once a user has sent data to my service, I want to be able to send back an image encoding of their choice, from the select options, such as PNG, SVG and GIF. To do this, and to make image designs (such as colours) the same on each exported type, I will need to use a base image. For this, I am using an SVG, as it's the easiest to create and maintain from a developer's perspective when creating either standard layouts or a master template as an SVG is an XML-based<sup id="i9">[9](#f9)</sup> vector image. This means it can be written as text and then interpreted by the browser (or other software) to output a graphic. SVGs also allow for inline CSS<sup id="i10">[10](#f10)</sup> which will allow for a themeable environment. Such environment will increase the production value of my project as users will be able to create and use colours related to their product or website etc.
+Once a user has sent data to my service, I want to be able to send back an image encoding of their choice, from the select options, such as PNG, SVG and GIF. To do this, and to make image designs (such as colours) the same on each exported type, I will need to use a base image. For this, I am using an SVG, as it's the easiest to create and maintain from a developer's perspective when creating either standard layouts or a master template as an SVG is an XML-based vector image. This means it can be written as text and then interpreted by the browser (or other software) to output a graphic. SVGs also allow for inline CSS which will allow for a themeable environment. Such environment will increase the production value of my project as users will be able to create and use colours related to their product or website etc.
 
 For converting the image from an SVG to other encodings I will require an external package. I have done some research and feel that Discord's Go image manipulation package will be sufficient for my needs when encoding an SVG to other codecs.
 
-> Improve this section with further research
-
 #### Carbon
 
-Carbon<sup id="i11">[11](#f11)</sup> is a very similar project to what I want to achieve. However, they focused on a website-first design which means that they don't have a public API which other users can implement onto their own apps, they have to instead use the website. This creates more work for the creator of a blog etc. and limits the pluggability of such a service into other projects created by 3rd party developers. There are however a few community<sup id="i12">[12](#f12)</sup> projects that aim to implement Carbon<sup id="i11">[11](#f11)</sup> into other text editors and a CLI (Command Line Interface), and I would welcome these ideas into my project.
+Carbon<sup id="i21">[21](#f21)</sup> is a very similar project to what I want to achieve. However, they focused on a website-first design which means that they don't have a public API which other users can implement onto their own apps, they have to instead use the website. This creates more work for the creator of a blog etc. and limits the pluggability of such a service into other projects created by 3rd party developers. There are however a few community projects that aim to implement Carbon into other text editors and a CLI (Command Line Interface), and I would welcome these ideas into my project.
 
 #### User-Agent
 
-A user-agent is a string that is sent from every browser with each request. It can be used to ensure that the sent data is rendered correctly for each browser engine. I plan to use this feature to test whether the HTTP request for the image is being sent from a browser, or another resource. To do this I will match the sent user-agent against an array of 'known' user-agents for the most used browsers<sup id="ix">[x](#fx)</sup>. The reason I want to check whether a request is sent from a browser is to change the request to include HTML code for my code-editing form. This obviously can't be included when the image is fetched from another source as it would be expecting an image header and an image file to be sent directly. This may cause some confusion for users if they use options like 'open image in new tab'. To counteract this, I will add an option to append to the URL to directly get the image.
+A user-agent is a string that is sent from every browser with each request. It can be used to ensure that the sent data is rendered correctly for each browser engine. I plan to use this feature to test whether the HTTP request for the image is being sent from a browser, or another resource. To do this I will match the sent user-agent against an array of 'known' user-agents for the most used browsers. The reason I want to check whether a request is sent from a browser is to change the request to include HTML code for my code-editing form. This obviously can't be included when the image is fetched from another source as it would be expecting an image header and an image file to be sent directly. This may cause some confusion for users if they use options like 'open image in new tab'. To counteract this, I will add an option to append to the URL to directly get the image.
 
 This will mean that I will have the URLs built as:
 
@@ -133,15 +162,15 @@ As a developer would be able to directly include an image using the `/raw/<hash>
 
 #### Cross Platform
 
-Due to the design of Go<sup id="i2">[2](#f2)</sup> and the powerful CLI options, the source-code can be built to run on most architectures, and all well-known ones such as Darwin<sup id="i13">[13](#f13)</sup> (MacOS / iOS<sup id="i14">[14](#f14)</sup>), Linux<sup id="i14">[15](#f15)</sup>, Windows<sup id="i16">[16](#f16)</sup> and FreeBSD<sup id="i17">[17](#f17)</sup>. Sometimes there is a needed addition of a C compiler for architectures such as Android<sup id="i18">[18](#f18)</sup>. It even supports WASM<sup id="i19">[19](#f19)</sup> which allows for Go to be compiled and supported on a browser.
+Due to the design of Go and the powerful CLI options, the source-code can be built to run on most architectures, and all well-known ones such as Darwin (MacOS / iOS), Linux, Windows and FreeBSD. Sometimes there is a needed addition of a C compiler for architectures such as Android. It even supports WASM which allows for Go to be compiled and supported on a browser.
 
 This has an increased benefit to me as it allows for future development of CLIs to be run on their different host machines while still being programmed in Go, and allows development on a MacOS or Windows computer to be tested and compiled natively before being recompiled for a Linux server. This helps save costs as Microsoft Windows Servers can be costly due to the licencing needed.
 
 #### Essential features of the computational solution
 
-The Go ecosystem will help provide many of the essential computational features of my solution, as it provides many useful built-in packages which hold functions and types such as the ability to manipulate and fetch system environment variables from the `os`<sup id="ix">[x](#fx)</sup> package.
+The Go ecosystem will help provide many of the essential computational features of my solution, as it provides many useful built-in packages which hold functions and types such as the ability to manipulate and fetch system environment variables from the `os` package.
 
-A key feature of my solution will be the ability to save and load image files. This will require the use of Go's `io`<sup id="i16">[16](#f16)</sup> package to read and write data to the storage devices of the system. This is at the heart of computational methods as storing and retrieving data allows for programs to run affectively and can be as small as the storing of data in RAM which allows the CPU to read and write data so it can evaluate calculations.
+A key feature of my solution will be the ability to save and load image files. This will require the use of Go's `io` package to read and write data to the storage devices of the system. This is at the heart of computational methods as storing and retrieving data allows for programs to run affectively and can be as small as the storing of data in RAM which allows the CPU to read and write data so it can evaluate calculations.
 
 Another feature I will be using in my solution is a queue package I have created. This allows for each part of my solution, such as the image generation engine and the server request handler, to remain separate as this will aid in development as it removes complications between lots of imports. It will work using a channel model where each section can either post to this channel or subscribe to this channel. A post even will send data to this channel. A subscriber will receive the data sent after a post request and allows for event driven execution where a portion of code is only executed after this data has been given.
 
@@ -149,9 +178,9 @@ Finally, the ability to handle requests to my server over the HTTP (and HTTPS) p
 
 #### Limitations
 
-As far a Go<sup id="i2">[2](#f2)</sup> goes there are very few technical limitations. However, as a project there are a few limitations surrounding the development life-cycle and 'real-world' usage.
+As far a Go goes there are very few technical limitations. However, as a project there are a few limitations surrounding the development life-cycle and 'real-world' usage.
 
-These are things such as including rate-limiting<sup id="i20">[20](#f20)</sup> and authorisation<sup id="i21">[21](#f21)</sup> over a public endpoint to reduce server load and prevent DDoS attacks<sup id="i22">[22](#f22)</sup> from overloading the server due to image processing tasks which are resource intensive.
+These are things such as including rate-limiting and authorisation over a public endpoint to reduce server load and prevent DDoS attacks from overloading the server due to image processing tasks which are resource intensive.
 
 Due to the time constrain of the given period to complete this task, I will not be including these factors as they will require a database to be setup, a database handler to be implemented and a user service that would handle sign-ups and token generations. I feel these would deviate to far from the core of the project and in turn I have decided to design the program in such a way that a database could be implemented at a later date and support these factors, but the current endpoint for the project will be created without any security features protecting it from attacks as it will only be used in a contained and controlled environment. I will also store the generated files locally without a configuration counterpart. This lack of configuration which would have been stored in the database means that there is no relational history between files and their edits such as the history of the file. This is a point that can be expanded on in the future.
 
@@ -159,23 +188,23 @@ Due to the time constrain of the given period to complete this task, I will not 
 
 #### Project Specification
 
-A REST API<sup id="i23">[23](#f23)</sup> web server with the ability to receive a payload, use said values and options sent to create and return an image containing the code in a timely manor with support for styling and encoding options.
+A REST API web server with the ability to receive a payload, use said values and options sent to create and return an image containing the code in a timely manor with support for styling and encoding options.
 
-The ability to recognise when an image is being accessed by a browser using the user-agent<sup id="i24">[24](#f24)</sup> to either serve a HTML page containing an editor or the raw encoding of an image when it is being accessed by a server which expects an image type to be found.
+The ability to recognise when an image is being accessed by a browser using the user-agent to either serve a HTML page containing an editor or the raw encoding of an image when it is being accessed by a server which expects an image type to be found.
 
 #### Software Needed (Development)
 
-- Go<sup id="i2">[2](#f2)</sup>.
+- Go.
 - A text editor.
-- Any supported operating system of both Go<sup id="i2">[2](#f2)</sup> and a text editor.
+- Any supported operating system of both Go and a text editor.
 
 #### Hardware Needed (Development)
 
-- A computer with at minimum a keyboard, monitor and adhering to the minimum hardware requirements<sup id="i25">[25](#f25)</sup> of Go.
+- A computer with at minimum a keyboard, monitor and adhering to the minimum hardware requirements<sup id="i22">[22](#f22)</sup> of Go.
 
 #### Software Requirements (User)
 
-- Any system capable of using cURL<sup id="i26">[26](#f26)</sup> or alternatives.
+- Any system capable of using cURL or alternatives.
 
 #### Hardware Requirements (User)
 
@@ -220,6 +249,10 @@ The ability to recognise when an image is being accessed by a browser using the 
 7. Is the image capable of being returned in more than one format?
 
    This will be nice to have as it will allow stakeholders to select their preferred image type as different image formats have different use cases which the stakeholder will benefit from if they have the correct image for their needs.
+   
+8. Is the website suitable and easy to use?
+
+   This ensures that users are able to use the project with ease and not have to setup an API.
 
 
 ## 3.2 Design of the solution
@@ -379,7 +412,7 @@ This will output the created SVG to the `buffer` and allow me to save it to a fi
 
 The queue package is the heart of the program as it handles the communicated between all other packages while enabling a decoupled environment. This is also know as micro-services though this implementation isn't an exact representation as they all have a single entry point within the `main.go` file. However, in the future it will be possible to move this to a complete micro-service and have the queue package handle events over multiple servers and processes. This also allows for the introduction of load balancing where extra logic is used within the queue package. For example, to send data within a queue to one node or another if there were two identical catalogue processes based on how many queue events one node is already handling.
 
-The queue package I will be implementing at the moment will be a simple design using Go channels<sup id="ix">[x](#fx)</sup>. These can be used to pass data from one Go routine<sup id="ix">[x](#fx)</sup> to another. I use buffered Go channels as these allow for multiple entries to be send 'along' the channel without having to wait for it to be cleared.
+The queue package I will be implementing at the moment will be a simple design using Go channels. These can be used to pass data from one Go routine to another. I use buffered Go channels as these allow for multiple entries to be send 'along' the channel without having to wait for it to be cleared.
 
 In my project, I am planning on using the following structure from the figure below for my queue structure. In this structure, the HTTP request handler ('Handler') is the centre node which sends and receives requests from both the Catalogue package and the encoding engine packages. This allows it to orchestrate the cycle of events by utilising the queues and waiting for values to be returned. At the moment this will all have to take place within one project but using techniques mentioned above, this could be split over multiple nodes or servers using the queues as a communication structure.
 
@@ -508,7 +541,7 @@ The logic within the function checks if a channel with the name passed as `topic
 
 #### Router Package
 
-The router package contains two sub-packages: listener and handler. The router package will contain a list of routes we are using to server and receive data. This is where we are able to include the `HttpRouter`<sup id="i8">[8](#f8)</sup> and configure the paths which we will later import into our listener package. This package allows us to create templates which are useful for when we are matching image routes via our hashes. The list of routes I will be using are:
+The router package contains two sub-packages: listener and handler. The router package will contain a list of routes we are using to server and receive data. This is where we are able to include the `HttpRouter` and configure the paths which we will later import into our listener package. This package allows us to create templates which are useful for when we are matching image routes via our hashes. The list of routes I will be using are:
 
 - `GET /` - Home page
 - `GET /<hash>` - Editor page
@@ -672,45 +705,9 @@ The types package doesn't contain any importable functions and instead includes 
 | Fetch the image from a non-browser user-agent. | Make a request to the image via software that does not contain a browser user-agent. | That an image header is returned and the image is returned,  | This ensures is can be included on websites without any unknow behaviour. |
 |   Fetch the image from a browser user-agent.   |               Open the image URL in a browser.               |             I am redirected to the editor page.              | This is a fundamental feature that differentiates my product from other similar tools. |
 
-
-
 ## 3.3 Developing the solution
 
-<details><summary>Section check list</summary>
-
-**To do:**
-
-- [ ] Provided evidence of each stage of the iterative development process for a coded solution relating this to the break down of the problem from the analysis stage and explaining what they did and justifying why.
-- [ ] Provided evidence of prototype versions of their solution for each stage of the process.
-- [ ] The solution will be well structured and modular in nature.
-- [ ] Code will be annotated to aid future maintenance of the system.
-- [ ] All variables and structures will be appropriately named.
-- [ ] There will be evidence of validation for all key elements of the solution.
-- [ ] The development will show review at all key stages in the process.
-
-</details>
-
-<details><summary>Section notes</summary>
-**Notes:**
-
-- Talk through the development of your program
-- Show you have systematically tested the code you have written as you go along
-- Do not hide mistakes, talk about them
-
-</details>
-
 ### 3.3.1 Iterative development process
-
-<details><summary>Section check list</summary>
-
-**To do:**
-
-- [ ] Provide annotated evidence of each stage of the iterative development process justifying any decision made.
-- [ ] Provide annotated evidence of prototype solutions justifying any decision made.
-
-</details>
-
-> Why I had to create a type for queues with the hash and completed value. 
 
 #### Setting up the project
 
@@ -1092,9 +1089,9 @@ As you can see, the function checks if the request accepts the "text/html" encod
 |     Brave      | Request can be redirected |
 | Brave via HTML |      Serve the image      |
 
-This is exactly what I want. This is also more developer / user / software friendly as it only send them the HTML if they accept it.
+This is exactly what I want. This is also more developer / user / software friendly as it only sends the HTML if they accept it.
 
-To get the image name and extension from the URL, I have written a small function that takes a string, slits it after each `.` character. This looks like so:
+To get the image name and extension from the URL, I have written a small function that takes a string, splits it after each `.` character. This looks like so:
 
 ```go
 func splitPath(path string) (types.Image, error) {
@@ -1322,7 +1319,7 @@ Now I need to create the JavaScript within the HTML to send a post request to th
 
 ![image-20210202180323820](./images/image-20210202180323820.png)
 
-This shows me that the request is being made successfully to the server. To finalise this, I will update the data received from the API to emulate the JSON object we expect to be returned. I will also add a theme dropdown with a `light` and `dark` value. After these chances, the output after "Generate Images" had been selected was:
+This shows me that the request is being made successfully to the server. To finalise this, I will update the data received from the API to emulate the JSON object we expect to be returned. I will also add a theme dropdown with a `light` and `dark` value. After these changes, the output after "Generate Images" had been clicked was:
 
 ![image-20210202181805644](./images/image-20210202181805644.png)
 
@@ -1380,7 +1377,7 @@ func IndexHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Param
 }
 ```
 
-With a slight amendment to the HTM file, I can prevent the empty `Image: ([])` value from showing and instead show a new image title.
+With a slight amendment to the HTML file, I can prevent the empty `Image: ([])` value from showing and instead show a new image title.
 
 ```html
 {{ if .Hash}}
@@ -1586,105 +1583,551 @@ Running the code again reusing the previous input produces an output of the imag
 
 #### Engine PNG Package
 
-bla bla bla
+As I had originally planned to create an SVG and then convert this into a PNG using Steven's `oksvg` package to check that the SVG syntax was correct and his `rasterx` package to convert this SVG into a PNG I came across a strange bug that I hadn't expected. The `rasterx` package converted the SVG to PNG by tracing each element's path, similar to x and y coordinates on a map, which worked fine for the background and border as these were simple shapes. However, the text wasn't converted into a path due to the complexities and therefore did not get converted. This resulted in an empty box with no text being displayed.
+
+The code what I originally tried was:
+
+```go
+func BuildPNG(img types.Image) {
+  // Set height and width of image
+	w, h := 512, 512
+  // Get the SVG as a string
+	icon, err := oksvg.ReadIconStream(strings.NewReader(img.Payload))
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
+	icon.SetTarget(0, 0, float64(w), float64(h))
+	rgba := image.NewRGBA(image.Rect(0, 0, w, h))
+  // Draw paths
+	icon.Draw(rasterx.NewDasher(w, h, rasterx.NewScannerGV(w, h, rgba, rgba.Bounds())), 1)
+  // Create file and open it
+	out, err := os.Create(fmt.Sprintf("public/%v.png", img.Hash))
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
+
+	defer out.Close()
+
+  // Output generated PNG to file
+	err = png.Encode(out, rgba)
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
+	logrus.Infof("SVG %v created.", img.Hash)
+}
+```
+
+I thought it may be possible to amend this by converting the text to a path before passing it into the `rasterx` package but this was not possible. Therefore I had to revisit how I originally create an SVG and what data is used.
+
+#### Engine SVG Package - Attempt Two
+
+After a lot of research into a better way to create a type of data that can be converted into an SVG and PNG easily I found Taco's `canvas` package. This seemed like a really useful approach that I had not yet considered. It worked by adding elements to a canvas, similar to how I was originally creating an SVG, however this was slightly lower level meaning a slightly higher complexity, and instead of having to convert from an SVG to other formats. I could use the canvas I had created and directly convert this into either a PNG or a SVG. This also means I could support more formats due to the nature of being able to convert this low level canvas.
+
+To create such a canvas, I used the following code, it works very similar to how I originally generated the SVG by drawing shapes:
+
+```go
+func drawImage(lines []string, bg, box, text color.Color) *canvas.Canvas {
+	intWidth := 0
+	// Alter indentation of line based on number of tabs as these get removed
+	for _, line := range lines {
+		length := (strings.Count(line, "\t") * 6) + len(line)
+		if length > intWidth {
+			intWidth = length
+		}
+	}
+
+	// Generate the width and the height of the element
+	width := float64((intWidth * 6) + 100)
+	height := float64((len(lines) * 17) + 45)
+
+	// Create a new canvas
+	ctx := canvas.New(float64(width), float64(height))
+	c := canvas.NewContext(ctx)
+
+	// Set the font and declare what a rectangle, circle and inner box should look like
+	face := fontFamily.Face(30.0, text, canvas.FontRegular, canvas.FontNormal)
+	rect := canvas.Rectangle(width+10, height+10)
+	inner := canvas.RoundedRectangle(width-(2*(height/10)), height-(2*(height/10)), 12.0)
+	circle := canvas.Circle(6.0)
+	// Declare the colour for the next drawn path, in this case the back ground
+	c.SetFillColor(bg)
+	c.DrawPath(0, 0, rect)
+	c.SetFillColor(box)
+	c.DrawPath(height/10, height/10, inner)
+	// Draw the three circles that are placed at the top right for a nice look
+	c.SetFillColor(tomato)
+	c.DrawPath(width-(height/10)-12, height-(height/10)-12, circle)
+	c.SetFillColor(yellow)
+	c.DrawPath(width-(height/10)-28, height-(height/10)-12, circle)
+	c.SetFillColor(green)
+	c.DrawPath(width-(height/10)-44, height-(height/10)-12, circle)
+
+	for i, line := range lines {
+		_ = i
+		// Calculate the x position of the line, used for indentation
+		x := (height / 10.0) + 10.0 + (float64(strings.Count(line, "\t")) * 8.0)
+		// Calculate the y position of the line
+		y := height - (height / 10) - 35.0 - (float64(i) * 13.7)
+		text := canvas.NewTextLine(face, strings.ReplaceAll(line, "\t", ""), canvas.Left)
+		// Write the new line to the canvas
+		c.DrawText(float64(x), float64(y), text)
+	}
+
+	return ctx
+}
+```
+
+This returns a `*canvas.Canvas` type and this is what we are able to create either an SVG or PNG from. The `drawImage(lines []string, bg, box, text color.Color)` function takes 4 parameters, an array of strings, and 3 `color.Color` types, which are 32-bit alpha-premultiplied colours and are declared as such: `nicePurple = color.RGBA{0xE6, 0xE6, 0xFA, 0xff}` using the HEX values of red, green, blue and alpha. I chose to create a function that allows me to pass these colours as parameters, as it enables me to easily generate an image using a different theme, like so:
+
+```go
+	if image.Theme == "light" {
+		builtCanvas = drawImage(lines, nicePurple, color.White, color.Black)
+	} else {
+		builtCanvas = drawImage(lines, niceBlue, color.Black, color.White)
+	}
+```
+
+After the canvas has been created and assigned to the `builtCanvas ` variable, I can finally use the `svg.Writer` function to convert the canvas and write the data to a file given. This is done like so:
+
+```go
+	err = svg.Writer(file, builtCanvas)
+	if err != nil {
+		logrus.Error(err)
+	}
+```
+
+To pass this into the PNG engine package, we simply pass the image type into the "engine.png" queue after setting the `image.Canvas` value to our new `canvas.Canvas` pointer: 
+
+```go
+image.Canvas = *builtCanvas
+	go queue.Queues.Publish("engine.png", image)
+```
+
+This has now successfully created an SVG and passed the contents to the PNG queue so we can handle in there.
+
+#### Engine PNG Package - Attempt Two
+
+Since we have already create our `canvas.Canvas` type, we don't need to re-create it. Therefore, we can simply run the following code and use the crated canvas to produce the PNG:
+
+```go
+// Output the rasterized PNG to the public/<hash>.png file
+err := image.Canvas.WriteFile(fmt.Sprintf("public/%v.png", image.Hash), rasterizer.PNGWriter(2.5))
+if err != nil {
+  logrus.Error(err)
+  return
+}
+logrus.Infof("PNG %v created.", image.Hash)
+```
+
+This has really simplified image creation, though it was slightly more confusing to create the canvas.
 
 ### 3.3.2 Testing to inform development
 
-<details><summary>Section check list</summary>
+Before we even begin testing, I will try to build my program using the Go compiler, this will optimise the code for the platforms I will be testing on, and initially provide any errors such as incorrect type and variable assignments. The two platforms I will be testing on are my desktop and my server. These both run different hardware and a different operating system so it will be a good test of cross-platform capabilities, although this hardware is extremely advanced compared to the requirements. The hardware is as below:
 
-**To do:**
+##### Desktop
 
-- [ ] Provide annotated evidence for testing at each stage justifying the reason for the test.
-- [ ] Provide annotated evidence of any remedial actions taken justifying the decision made.
+- OS: Windows 10 Pro (20H2)
+- Processor: AMD Ryzen 7 3800X (8-Core)
+- RAM: 16 GB
 
-</details>
+##### Server
 
-<details><summary>Section notes</summary>
+- OS: Ubuntu 20.10
+- Processor: Intel Core i7-6700K (4-Core)
+- RAM: 64GB
 
-**Notes:**
+Once the code has been compiled, it has a maximum size of 14.2 MB for windows, and the Linux binary is 14.0 MB in size. As I have created a program that I intend to be used via a web interface and an API, these are where I will focus my testing efforts. I will also perform each request twice on both Windows and Ubuntu to ensure there are no strange compatibility issues due operating system packages or low-level APIs. I will also test these against the success criteria declared in section 3.1.4.
 
-- Final, terminal testing to prove you've met the success criteria and objectives you identified in the analysis stage
+#### Expected Inputs
 
-</details>
+|            Web UI / API            | Input (text)                                                 |                        Output (image)                        | Outcome |
+| :--------------------------------: | ------------------------------------------------------------ | :----------------------------------------------------------: | :-----: |
+|   API - Using dark theme header    | func main() {<br/>	router.Start()<br/>	logrus.Info("lets begin testing")<br/>} | <img src="images/ec7ed1c.png" alt="img" style="zoom: 33%;" /> |  Pass   |
+|   API - Using light theme header   | func main() {<br/>	router.Start()<br/>	logrus.Info("lets begin testing")<br/>} | <img src="images/dc825498.png" alt="img" style="zoom: 33%;" /> |  Pass   |
+| Web UI - With dark theme selected  | func main() {<br/>	router.Start()<br/>	logrus.Info("lets begin testing")<br/>} | <img src="images/f4187740.png" alt="img" style="zoom:33%;" /> |  Pass   |
+| Web UI - With light theme selected | func main() {<br/>	router.Start()<br/>	logrus.Info("lets begin testing")<br/>} | <img src="images/5d785d1b.png" alt="img" style="zoom:33%;" /> |  Pass   |
+
+This is at first looking really positive, the tests all pass with an expected input and both output images look the same regardless of using the API or Web UI. 
+
+#### Strange Aspect Ratios
+
+Next, I will test with really long and flat values, and really tall and thin values. For sake of simplicity, I will continue all tests using the API and light theme as I can say with confidence that it will produce the same output as the Web UI or using the dark theme.
+
+|      Input (text)      |                        Output (image)                        |       Outcome       |
+| :--------------------: | :----------------------------------------------------------: | :-----------------: |
+|      *100 x* `=`       | <img src="images/c940cba6.png" alt="img" style="zoom:25%;" /> | Pass (With concern) |
+|      *200 x* `=`       | <img src="images/83567687.png" alt="img" style="zoom:20%;" /> | Pass (With concern) |
+|     *100 x* `=\n`      | <img src="images/5cc15e2.png" alt="img" style="zoom:5%;" />  |        Fail         |
+| *10 x* `==========\n`  | <img src="images/1005421f.png" alt="img" style="zoom:25%;" /> | Pass (With concern) |
+| *100 x* `==========\n` | <img src="images/11ff1da5.png" alt="img" style="zoom:10%;" /> |        Fail         |
+
+As you can see from the above image, there was only a pass rate of 60%, and even these were "with concern" meaning that I can visually spot how more of the same value will produce an unexpected output, as you can see, the right margin of text between 100 x `=` and 200x more than halves, showing that 400x will most likely continue of the page.
+
+Although these failed, I don't feel that these are project breaking faults as they only occur under a specific use-case with will be rarely used by the shareholders I am building the project for, therefore I am willing to leave this bug here and fix it at a later date.
+
+#### Larger Inputs
+
+Here I will test some larger code blocks.
+
+##### Input (text)
+
+```
+// BuildPNG is a helper function to create the image that will be sent
+func BuildPNG(image types.Image) {
+	// Output the rasterized PNG to the public/<hash>.png file
+	err := image.Canvas.WriteFile(fmt.Sprintf("public/%v.png", image.Hash), rasterizer.PNGWriter(2.5))
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
+	logrus.Infof("PNG %v created.", image.Hash)
+}
+```
+
+##### Output (image)
+
+<img src="images/ffd47c1b.png" alt="img" style="zoom: 33%;" />
+
+##### Outcome
+
+Pass
+
+##### Input (text)
+
+```
+package logger
+
+import (
+    "fmt"
+    "runtime"
+    "strings"
+
+    "github.com/sirupsen/logrus"
+)
+
+// Format configures the logrus logger output, this only needs to be called once.
+func Format() {
+    logrus.SetReportCaller(true)
+    formatter := &logrus.TextFormatter{
+        // ForceColors:            true,                  // Don't check for TTY
+        TimestampFormat:        "02-01-2006 15:04:05", // the "time" field configuration
+        FullTimestamp:          true,
+        DisableLevelTruncation: true, // log level field configuration
+        CallerPrettyfier: func(f *runtime.Frame) (string, string) {
+            // this function is required when you want to introduce your custom format.
+            // In my case I wanted file and line to look like this `file="engine.go:141`
+            // but f.File provides a full path along with the file name.
+            // So in `formatFilePath()` function I just trimmet everything before the file name
+            // and added a line number in the end
+            return "", fmt.Sprintf("(%s:%d)", formatFilePath(f.File), f.Line)
+        },
+    }
+    logrus.SetFormatter(formatter)
+}
+
+// formatFilePath is a small helper function to return the file of which the log originates and
+// not the whole path
+func formatFilePath(path string) string {
+    arr := strings.Split(path, "/")
+    return arr[len(arr)-1]
+}
+```
+
+##### Output (image)
+
+<img src="images/da4c7acb.png" alt="img" style="zoom: 33%;" />
+
+##### Outcome
+
+Fail - text overruns the edge of the image.
+
+------
+
+
+After testing this, it was clear there was an issue with how the image sizing is generated. After editing the generation as shown below, I re-ran the tests:
+
+```diff go
+intWidth := 0
++ padding := 25.0
+// Alter indentation of line based on number of tabs as these get removed
+for _, line := range lines {
+  length := (strings.Count(line, "\t") * 6) + len(line)
+  if length > intWidth {
+    intWidth = length
+  }
+}
+
+// Generate the width and the height of the element
+width := float64((intWidth * 6) + 100)
+- height := float64((len(lines) * 17) + 45)
++ height := float64((len(lines) * 14) + 80)
+
+// Create a new canvas
+ctx := canvas.New(float64(width), float64(height))
+c := canvas.NewContext(ctx)
+
+// Set the font and declare what a rectangle, circle and inner box should look like
+face := fontFamily.Face(30.0, text, canvas.FontRegular, canvas.FontNormal)
+rect := canvas.Rectangle(width+10, height+10)
+- inner := canvas.RoundedRectangle(width-(2*(height/10)), height-(2*(height/10)), 12.0)
++ inner := canvas.RoundedRectangle((width-50), (height-50), 12.0)
+circle := canvas.Circle(6.0)
+// Declare the colour for the next drawn path, in this case the back ground
+c.SetFillColor(bg)
+c.DrawPath(0, 0, rect)
+c.SetFillColor(box)
+- c.DrawPath(height/10, height/10, inner)
++ c.DrawPath(padding, padding, inner)
+// Draw the three circles that are placed at the top right for a nice look
+c.SetFillColor(tomato)
+- c.DrawPath(width-(height/10)-12, height-(height/10)-12, circle)
++ c.DrawPath(width-(padding)-12, height-(padding)-12, circle)
+c.SetFillColor(yellow)
+- c.DrawPath(width-(height/10)-12, height-(height/10)-12, circle)
++ c.DrawPath(width-(padding)-12, height-(padding)-12, circle)
+c.SetFillColor(green)
+- c.DrawPath(width-(height/10)-12, height-(height/10)-12, circle)
++ c.DrawPath(width-(padding)-12, height-(padding)-12, circle)
+
+for i, line := range lines {
+  _ = i
+  // Calculate the x position of the line, used for indentation
+-  x := (height / 10.0) + 10.0 + (float64(strings.Count(line, "\t")) * 8.0)
++  x := padding + 10.0 + (float64(strings.Count(line, "\t")) * 8.0)
+  // Calculate the y position of the line
+-  y := height - (height / 10) - 35.0 - (float64(i) * 13.7)
++  y := (height - padding) - 35.0 - (float64(i) * 13.7)
+  text := canvas.NewTextLine(face, strings.ReplaceAll(line, "\t", ""), canvas.Left)
+  // Write the new line to the canvas
+  c.DrawText(float64(x), float64(y), text)
+}
+```
+
+Re-running the previous tests.
+
+##### Input (text)
+
+```
+// BuildPNG is a helper function to create the image that will be sent
+func BuildPNG(image types.Image) {
+	// Output the rasterized PNG to the public/<hash>.png file
+	err := image.Canvas.WriteFile(fmt.Sprintf("public/%v.png", image.Hash), rasterizer.PNGWriter(2.5))
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
+	logrus.Infof("PNG %v created.", image.Hash)
+}
+```
+
+##### Output (image)
+
+<img src="images/4c161fc2.png" alt="img" style="zoom: 33%;" />
+
+##### Outcome
+
+Pass
+
+##### Input (text)
+
+```
+package logger
+
+import (
+    "fmt"
+    "runtime"
+    "strings"
+
+    "github.com/sirupsen/logrus"
+)
+
+// Format configures the logrus logger output, this only needs to be called once.
+func Format() {
+    logrus.SetReportCaller(true)
+    formatter := &logrus.TextFormatter{
+        // ForceColors:            true,                  // Don't check for TTY
+        TimestampFormat:        "02-01-2006 15:04:05", // the "time" field configuration
+        FullTimestamp:          true,
+        DisableLevelTruncation: true, // log level field configuration
+        CallerPrettyfier: func(f *runtime.Frame) (string, string) {
+            // this function is required when you want to introduce your custom format.
+            // In my case I wanted file and line to look like this `file="engine.go:141`
+            // but f.File provides a full path along with the file name.
+            // So in `formatFilePath()` function I just trimmet everything before the file name
+            // and added a line number in the end
+            return "", fmt.Sprintf("(%s:%d)", formatFilePath(f.File), f.Line)
+        },
+    }
+    logrus.SetFormatter(formatter)
+}
+
+// formatFilePath is a small helper function to return the file of which the log originates and
+// not the whole path
+func formatFilePath(path string) string {
+    arr := strings.Split(path, "/")
+    return arr[len(arr)-1]
+}
+```
+
+##### Output (image)
+
+<img src="images/1c71e4ac.png" alt="img" style="zoom: 33%;" />
+
+##### Outcome
+
+Pass
+
+------
+
+They now both pass, due to the success of this, I am also going to re-run the tests from the 'Strange Aspect Ratios' section and see if more than 60% pass.
+
+#### Strange Aspect Ratios - Test Two
+
+|      Input (text)      |                        Output (image)                        | Outcome |
+| :--------------------: | :----------------------------------------------------------: | :-----: |
+|      *100 x* `=`       | <img src="images/307071e9.png" alt="img" style="zoom:25%;" /> |  Pass   |
+|      *200 x* `=`       | <img src="images/3a014b66.png" alt="img" style="zoom:20%;" /> |  Fail   |
+|     *100 x* `=\n`      | <img src="images/3e0ac7bc.png" alt="img" style="zoom:7%;" /> |  Pass   |
+| *10 x* `==========\n`  | <img src="images/42c8b7b.png" alt="img" style="zoom:25%;" /> |  Pass   |
+| *100 x* `==========\n` | <img src="images/548e809.png" alt="img" style="zoom:10%;" /> |  Pass   |
+
+Success! The pass rate for the same tests are now 80% which is a really good improvement of 20%.
+
+#### Programmatic Errors
+
+Throughout testing on both platforms, there were no errors that appeared during the creation of the images or handling of the payloads sent over the API.
 
 ## 3.4 Evaluation
 
-<details><summary>Section check list</summary>
-
-**To do:**
-
-- [ ] Provided annotated evidence of post development testing for function and robustness.
-- [ ] Provided annotated evidence for usability testing. Used the test evidence to cross reference with the success criteria to evaluate the solution explain how the evidence shows that the criteria has been fully, partially or not met in each case.
-- [ ] Provided comments on how any partially or unmet criteria could be addressed in further development.
-- [ ] Provided evidence of the usability features justifying their success, partial success or failure as effective usability features.
-- [ ] Provided comments on how any issues with partially or unmet usability features could be addressed in further development.
-- [ ] Considered maintenance issues and limitations of the solution.
-- [ ] Described how the program could be developed to deal with limitations of potential improvements / changes.
-- [ ] There is a well developed line of reasoning which is clear and logically structured. The information presented is relevant and substantiated.
-
-</details>
-<details><summary>Section notes</summary>
-
-**Notes:**
-
-- As you'd expect – how well did the project go?
-
-</details>
-
-### 3.4.1 Testing to inform evaluation
-
-<details><summary>Section check list</summary>
-
-**To do:**
-
-- [ ] Provide annotated evidence of testing the solution of robustness at the end of the development process.
-- [ ] Provide annotated evidence of usability testing (user feedback).
-
-</details>
-
 ### 3.4.2 Success of the solution
 
-<details><summary>Section check list</summary>
+Using the original success criteria as a guide I will outline the overall success of the solution.
 
-**To do:**
+#### Can the user access their image after creation?
 
-- [ ] Use the test evidence from the development and post development process to evaluate the solution against the success criteria from the analysis.
+Yes, the user is able to access the image created in a number of ways, namely by using the URLs provided once they have been returned from the API or WebUI. The routes they are currently able to use are `/i/<hash>.<type>` and `/raw/<hash>.<type>` depending on their needs.
 
-</details>
+#### Can the user upload their own input to be displayed?
+
+Yes, the user is able to upload their own code via both the API and WebUI. It accepts a wide range of input sizes as shown while testing. There are however a few issues if the user enters very specific aspect ratios, although this is unlikely to be an issue as it's unlikely a user will need such extreme images.
+
+#### Does the image redirect to the code when opened in a browser?
+
+Yes, although not as originally proposed. I originally expected to be able to use the browser's user agent string and match this against known browsers to return the HTML editor, and default to the raw image. This however became a problem as even if an image was embedded within a HTML page using an `<img />` tag, it sent the browser's user-agent.
+
+To fix this, I had to instead check whether the request accepted the `text/html` field using the **Accept** header. If so I displayed the HTML page, if not the raw image. This helped correct image embeds and also allowed the URL to become more URL friendly as it will only return HTML if that's an acceptable response.
+
+They are also able to copy the code from the textbox provided and generate a new image from their modified code.
+
+#### Are the image sizes appropriate for social media websites?
+
+No, the images currently form to the size of the text given by calculating the size of the area needed to fit the code. I plan to add this feature in the future by creating a new type that allows me to enforce image sizes based on the user's preference of social media. The reason I was unable to add this now is there is a vast difference between each image size, and this make it difficult to produce a 'best of both worlds' size. Therefore I have decided to not compromise on the current image and improve this at a later date.
+
+#### Does the end product satisfy the stakeholders?
+
+I had two users test my product, **user one** who is technically literate, and **user two** who is used to browsing websites and has started learning to code.
+
+##### User One
+
+This user found the API really simple and easy to use with the addition of headers to set values such as the theme. They also liked how the image paths were returned in an array. They requested that the website have some information but they knew this was not the way they would use the service. They were very pleased with the quality of the image produced but wished that code highlighting was an option.
+
+##### User Two
+
+This user was able to create an image using the WebUI after some difficulties, and then got confused with how to use the links provided as they kept getting redirected to the editor without warning. They did not know what an API was nor how to use one as this stage. However, once showed how to retrieve the image using the `/raw/` URL they were very pleased with the output and said they would use the solution if it was easier to use.
+
+##### Overall
+
+Both users were able to create an image, however they both mentioned that the WebUI needs improvement and they would like more customisability with regards to output. This shows that the product still has some work that needs to be done so user two can create images easier. However, using the API it is in a useable state for user one.
+
+#### Are there any errors during a normal use case that prevent usage?
+
+No, during testing there were no errors produced from the program, the only errors were how I calculated the size of the canvas. However, this is not a program issue and therefore the program works without trouble.
+
+#### Is the image capable of being returned in more than one format?
+
+Yes, currently the image can be returned in both PNG and SVG formats.
+
+#### Is the website suitable and easy to use?
+
+No, this is by far the biggest issue as it needs more information to enable users who don't know how an API works to easily create images. The website works, however is lacks ease of use due to lack of styling and instructions. I would say the layout of the website is suitable with a text box and dropdown for the theme selector, however it is not suitable for a first time user.
 
 ### 3.4.3 Describe the final product
 
-<details><summary>Section check list</summary>
+The final product is able to return a PNG and SVG image based on an input string given from either the API or WebUI with two colours schemes: light or dark, depending on what was selected while preserving new lines and indentation to improve legibility. The router package used within the project is capable of serving a large number of requests at a time without blocking code execution due to the nature of goroutines provided by my queue package which uses channels to provide asynchronous event handling.
 
-**To do:**
+The final product differs in multiple ways from the original proposed solution as while developing the solution I found better ways to solve problems, such as the way I now use low-level canvas and convert this to an SVG and PNG instead of doing the conversions directly from the SVG. It also does not use the Discord Go package for image manipulation as that is not something that I need to offer at the moment as I need something to create images and no edit existing images. This is due to the lack of understanding I possessed regarding the purpose of Discord's package and how this wasn't aligned with my needed use.
 
-- [ ] Provide annotated evidence of the usability features from the design, commenting on their effectiveness.
+The WebUI is a simple interface with only the specific functionality needed to create an image. As you can seem there is a text box for the code, a selector for either a light or dark theme, and the 'Generate Images' button that sends the request to the API.
 
-</details>
+![image-20210202191328856](./images/image-20210202191328856.png)
 
-### 3.4.4 Maintenance and development
+A curl request can be used to also access the API like below:
 
-<details><summary>Section check list</summary>
+```sh
+curl --location --request POST '/api/v1/create' \
+--header 'X-Veoir-Image-Theme: light' \
+--data-raw 'enter code here'
+```
 
-**To do:**
+This request can also therefore return images that look similar to the following:
 
-- [ ] Discuss the maintainability of the solution.
-- [ ] Discuss potential further development of the solution.
+<img src="images/72f113a6.png" alt="img" style="zoom:50%;" />
 
-</details>
+<img src="images/74fa3657.png" alt="img" style="zoom:50%;" />
+
+It stores these images in the `/public` directory so it can be served by the router package and accessed using both `/i/` and `/raw/`. It also stores a JSON file that looks like so:
+
+```json
+{
+ "payload": "func main() {\r\n    fmt.Println(\"Hello world!\")\r\n}",
+ "encodings": [
+  "svg",
+  "png"
+ ],
+ "theme": "dark",
+ "hash": "74fa3657"
+}
+```
+
+This stores the payload, encodings the image is available in, the theme and hash of the file. This allows us to display the text from within the image on the editor page so it can be edited or copied by a user at a later date.
+
+### 3.4.4 Maintenance and Development
+
+Code maintainability is an important aspect of every project as there are many instances where additions or changes need to be made. Therefore, I have aimed to make the project as maintainable as possible by using GIT, a version managing program and splitting each package into their respective areas as to not merge code. It also uses the queue package that can be expanded using tools like Redis to work across processes and even different servers without much modification to the majority of the program. To aid this, the catalogue package enables me to create a check in the future to not pass an existing name to the image generation packages as this would overwrite an existing image.
+
+In addition to this, the engine package has each image encoding stored in it's own file, making it easy to incorporate specific logic needed for each type and add, remove, or disable a specific encoding.
+
+Regarding future development, I would like to include a way for a user to give their own colour schemes so they can personalise their image. The most pressing issue I would like to face during future development, is ensuring the WebUI has more information and instructions to aid in the use by new and existing users as there is huge room for improvement.
+
+Another area I would like to improve is the generation of images when a user inputs extremely long strings as I feel I could improve this with a few tweaks to the canvas generation logic. I would also like to improve the padding on images to match specific social media sizes as this was one of the main goals for my project.
+
+In the long run, it would also be nice to integrate a database for users as this would allow them to login and view past images they have created as well as edit them for a 24 hour grace period in case they spot any silly mistakes like a misspelt word. 
 
 ## Footnotes
 
 1. <span id="f1"></span>A gist can be a string of code, a bash script or some other small piece of data and is an easy way to share code. GitHub (https://github.com) has a nice implementation of this in their GitHub Gist (https://gist.github.com) service. [↩](#i1)
 2. <span id="f2"></span>Go, sometimes referred to as Golang, is a programming language made by Google. Go's website (https://golang.org) contains more information. [↩](#i2)
-3. <span id="f2"></span>[↩](#i2)
-4. <span id="f3"></span>[↩](#i3)
-5. <span id="f4"></span>[↩](#i4)
-6. <span id="f5"></span>[↩](#i5)
-7. <span id="f7"></span>Julien Schmidt (https://github.com/julienschmidt) [↩](#i6)
-8. <span id="f8"></span>`HttpRouter` (https://github.com/julienschmidt/httprouter) [↩](#i7)
-9. <span id="f5"></span>[↩](#i5)
-10. <span id="f5"></span>[↩](#i5)
-11. <span id="f5"></span>Carbon's Website (https://carbon.now.sh/) [↩](#i5)
-12. <span id="f5"></span>Carbon's Github Readme (https://github.com/carbon-app/carbon#community) [↩](#i5)
-13. <span id="f25"></span> Minimum Requirements of Go (https://github.com/golang/go/wiki/MinimumRequirements) [↩](#i25)
+3. <span id="f3"></span>Go by Example: Structs (https://gobyexample.com/structs) [↩](#i3)
+4. <span id="f4"></span>Go by Example: Interfaces (https://gobyexample.com/interfaces) [↩](#i4)
+5. <span id="f5"></span>Go by Example: JSON (https://gobyexample.com/json) [↩](#i5)
+6. <span id="f6"></span>Go by Example: HTTP Servers (https://gobyexample.com/http-servers) [↩](#i6)
+7. <span id="f7"></span>Golang Blog (https://blog.golang.org/ismmkeynote) [↩](#i7)
+8. <span id="f8"></span>Goroutines (https://tour.golang.org/concurrency/1) [↩](#i8)
+9. <span id="f9"></span>Python programming language (https://www.python.org) [↩](#i9)
+10. <span id="f10"></span>PHP is a popular general-purpose scripting language (https://www.php.net/) [↩](#i10)
+11. <span id="f11"></span>JavaScript (https://en.wikipedia.org/wiki/JavaScript) [↩](#i11)
+12. <span id="f12"></span>V8 (https://v8.dev) [↩](#i12)
+13. <span id="f13"></span>NodeJS (https://nodejs.org) [↩](#i13)
+14. <span id="f14"></span>Dino (https://deno.land) [↩](#i14)
+15. <span id="f15"></span>TypeScript (https://www.typescriptlang.org) [↩](#i15)
+16. <span id="f16"></span>Julien Schmidt (https://github.com/julienschmidt) [↩](#i16)
+17. <span id="f17"></span>`HttpRouter` (https://github.com/julienschmidt/httprouter) [↩](#i17)
+18. <span id="f18"></span>Resty package on GitHub (https://github.com/go-resty/resty) [↩](#i18)
+19. <span id="f19"></span>Go-HTTP-Client package on GitHub (https://github.com/bozd4g/go-http-client) [↩](#i19)
+20. <span id="f20"></span>Gentleman package on GitHub (https://github.com/h2non/gentleman) [↩](#i20)
+21. <span id="f21"></span>Carbon's Website (https://carbon.now.sh/) [↩](#i21)
+22. <span id="f22"></span>Minimum Requirements of Go (https://github.com/golang/go/wiki/MinimumRequirements) [↩](#i22)
