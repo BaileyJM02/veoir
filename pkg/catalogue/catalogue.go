@@ -11,7 +11,7 @@ func init() {
 	rand.Seed(time.Now().UTC().UnixNano())
 }
 
-// Generate
+// Generate a random string seeded by the current time.
 func Generate() string {
 	crc32InUint32 := crc32.ChecksumIEEE([]byte(strconv.Itoa(rand.Int())))
 	crc32InString := strconv.FormatUint(uint64(crc32InUint32), 16)

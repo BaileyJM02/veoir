@@ -11,7 +11,7 @@ import (
 // Start initiates the HTTP server for webhooks and requests the bot to start
 func Start() {
 
-	// Start the HTTP server ()
+	// Start the HTTP server
 	server := &http.Server{
 		Addr:         os.Getenv("address"),
 		Handler:      GetRouter(),

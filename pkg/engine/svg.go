@@ -38,8 +38,10 @@ func StartSVGQueue() {
 
 // BuildSVG is a helper function to create the image that will be sent
 func BuildSVG(image types.Image) {
+	// Split the input into a slice with each value being a line
 	lines := strings.Split(image.Payload, "\n")
 
+	// Create the file we will output the SVG too
 	file, err := os.Create(fmt.Sprintf("public/%v.svg", image.Hash))
 	if err != nil {
 		logrus.Error(err)
@@ -47,21 +49,25 @@ func BuildSVG(image types.Image) {
 	}
 	defer file.Close()
 
+	// Declare the font we are going to use
 	fontFamily = canvas.NewFontFamily("times")
 	fontFamily.Use(canvas.CommonLigatures)
 	if err := fontFamily.LoadFontFile("JetBrainsMono.ttf", canvas.FontRegular); err != nil {
 		panic(err)
 	}
 
+	// Create the image with theme specific colours
 	if image.Theme == "light" {
 		builtCanvas = drawImage(lines, nicePurple, color.White, color.Black)
 	} else {
 		builtCanvas = drawImage(lines, niceBlue, color.Black, color.White)
 	}
 
+	// Pass the image type with new canvas to PNG queue
 	image.Canvas = *builtCanvas
 	go queue.Queues.Publish("engine.png", image)
 
+	// Generate and output the SVG
 	err = svg.Writer(file, builtCanvas)
 	if err != nil {
 		logrus.Error(err)
