@@ -2,7 +2,6 @@
 
 By Bailey Matthews (2020)
 
-- [Veoir Coursework](#veoir-coursework)
   - [3.1 Analysis of the problem](#31-analysis-of-the-problem)
     - [3.1.1 Problem identification](#311-problem-identification)
     - [3.1.2 Stakeholders](#312-stakeholders)
