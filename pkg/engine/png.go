@@ -24,6 +24,7 @@ func StartPNGQueue() {
 
 // BuildPNG is a helper function to create the image that will be sent
 func BuildPNG(image types.Image) {
+	// Output the rasterized PNG to the public/<hash>.png file
 	err := image.Canvas.WriteFile(fmt.Sprintf("public/%v.png", image.Hash), rasterizer.PNGWriter(2.5))
 	if err != nil {
 		logrus.Error(err)

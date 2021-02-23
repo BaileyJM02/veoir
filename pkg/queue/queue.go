@@ -39,7 +39,7 @@ type DataChannelSlice []DataChannel
 func (eb *EventBus) Publish(topic string, data interface{}) {
 	eb.rm.RLock()
 	if chans, found := eb.topics[topic]; found {
-		// this is done because the slices refer to same array even though they are passed by value
+		// This is done because the slices refer to same array even though they are passed by value
 		// thus we are creating a new slice with our elements thus preserve locking correctly.
 		channels := append(DataChannelSlice{}, chans...)
 		go func(data DataEvent, dataChannelSlices DataChannelSlice) {

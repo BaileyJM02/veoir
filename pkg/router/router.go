@@ -9,15 +9,15 @@ func GetRouter() *httprouter.Router {
 	// Add the endpoint for engine payloads
     router := httprouter.New()
 
-    // Frontend
+    // Frontend routes
     router.GET("/", IndexHandler)
     router.GET("/i/:image", ImageHandler)
     router.GET("/editor/:image/", EditorHandler)
 
-	// Raw image
+	// Raw image endpoint
     router.GET("/raw/:image", RawHandler)
     
-	// API
+	// API endpoint
 	router.POST("/api/v1/create", EngineHandler)
 
 

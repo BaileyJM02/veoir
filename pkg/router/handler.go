@@ -20,45 +20,6 @@ var errPathToShort = errors.New("path is too short, list to small")
 
 // EngineHandler is the endpoint for which the Veoir engine events should be sent
 // It checks if we support the sent event and handles it accordingly
-// func EngineHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-// 	var image types.Image
-// 	defer req.Body.Close()
-
-// 	payload, err := ioutil.ReadAll(req.Body)
-// 	if err != nil {
-// 		logrus.Error(err)
-// 	}
-
-// 	image.Encoding = req.Header.Get("X-Veoir-Image-Encoding")
-// 	image.Theme = req.Header.Get("X-Veoir-Image-Theme")
-// 	// image.User.ID = req.Header.Get("X-Veoir-User-ID")
-// 	image.Payload = payload
-
-// 	switch encoding := image.Encoding; encoding {
-// 	case "svg":
-// 		queue.Queues.Publish("engine.svg", image)
-// 		rw.WriteHeader(204)
-// 		return
-// 	default:
-// 		rw.WriteHeader(501) // Return 501 Not Implemented Request as we don't support that function
-// 		return
-// 	}
-
-// file, _ := json.MarshalIndent(types.Image{
-//     Payload: pl,
-//     Encodings: []string{"svg"},
-//     Hash: "test",
-// }, "", " ")
-
-// _ = ioutil.WriteFile("test.json", file, 0644)
-
-// }
-
-// payload, err := ioutil.ReadAll(req.Body)
-// if err != nil {
-// 	logrus.Error(err)
-// }
-
 func EngineHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	defer req.Body.Close()
 	var image types.Image
@@ -103,6 +64,7 @@ func EngineHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Para
 	rw.Write(json)
 }
 
+// IndexHandler serves the index editor page
 func IndexHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	defer req.Body.Close()
 	tmpl, err := template.ParseFiles("templates/editor.html")
@@ -122,6 +84,7 @@ func IndexHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Param
 	}
 }
 
+// EditorHandler serves the editor page from an image route
 func EditorHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	defer req.Body.Close()
 	data, err := ioutil.ReadFile(fmt.Sprintf("public/%v.json", ps.ByName("image")))
@@ -152,6 +115,7 @@ func EditorHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Para
 	}
 }
 
+// ImageHandler decides whether to server the image or HTML editor
 func ImageHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	defer req.Body.Close()
 	image, err := splitPath(ps.ByName("image"))
@@ -169,6 +133,7 @@ func ImageHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Param
 	serveImage(rw, req, image)
 }
 
+// RawHandler handles the /raw/ path and always servers the raw image
 func RawHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	defer req.Body.Close()
 	image, err := splitPath(ps.ByName("image"))

@@ -12,7 +12,7 @@ import (
 func Format() {
     logrus.SetReportCaller(true)
     formatter := &logrus.TextFormatter{
-        ForceColors:            true,                  // Don't check for TTY
+        // ForceColors:            true,                  // Don't check for TTY
         TimestampFormat:        "02-01-2006 15:04:05", // the "time" field configuration
         FullTimestamp:          true,
         DisableLevelTruncation: true, // log level field configuration

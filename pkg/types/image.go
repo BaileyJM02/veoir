@@ -4,7 +4,7 @@ import (
 	"github.com/tdewolff/canvas"
 )
 
-// Image comment
+// Image type to pass along channels
 type Image struct {
 	Payload   string        `json:"payload"`
 	Encodings []string      `json:"encodings"`
