@@ -251,7 +251,7 @@ The ability to recognise when an image is being accessed by a browser using the 
    
 8. Is the website suitable and easy to use?
 
-   This ensures that users are able to use the project with ease and not have to setup an API.
+   This ensures that users are able to use the project with ease and not have to setup an API. 
 
 
 ## 3.2 Design of the solution
