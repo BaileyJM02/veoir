@@ -4,7 +4,7 @@ By Bailey Matthews (2020)
 
   - [3.1 Analysis of the problem](#31-analysis-of-the-problem)
     - [3.1.1 Problem identification](#311-problem-identification)
-    - [3.1.2 Stakeholders](#312-stakeholders)
+    - [3.1.2 Stakeholders](#312-stakeholders) 
     - [3.1.3 Research the problem](#313-research-the-problem)
       - [Language](#language)
       - [External Language Packages](#external-language-packages)
