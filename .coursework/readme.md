@@ -193,7 +193,7 @@ The ability to recognise when an image is being accessed by a browser using the 
 
 #### Software Needed (Development)
 
-- Go.
+- Go. 
 - A text editor.
 - Any supported operating system of both Go and a text editor.
 
