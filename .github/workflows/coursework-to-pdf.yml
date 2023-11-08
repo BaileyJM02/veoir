@@ -48,7 +48,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build PDF
-        uses: baileyjm02/markdown-to-pdf@master
+        uses: baileyjm02/markdown-to-pdf@v1.1.0
         if: github.ref == 'refs/heads/master'
         with:
           input_dir: .coursework
